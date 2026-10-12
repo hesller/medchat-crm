@@ -93,6 +93,36 @@ class Brand
     )
   end
 
+  # The logged-in dashboard and the PWA manifest. Unlike #config and #web_config, which return
+  # the whole shape, this returns only what the account overrides, so the caller merges it over
+  # the installation config and every key the account left alone keeps its installation value.
+  #
+  # Gated by its own `branded_dashboard` feature, not by branded_email_templates: an account can
+  # want a branded inbox for its team without changing the email its customers receive, and an
+  # install that enables neither behaves exactly as it did before. Nothing here reads or
+  # depends on the enterprise/ directory.
+  def dashboard_branded?
+    account.present? && account.feature_enabled?(:branded_dashboard)
+  end
+
+  def dashboard_config
+    return {} unless dashboard_branded?
+
+    name = account.brand_name.presence
+    logo = dashboard_logo_path
+
+    {
+      'INSTALLATION_NAME' => name,
+      'BRAND_NAME' => name,
+      # normalize drops anything that is not a hex colour, so a bad stored value falls back to
+      # the installation instead of reaching the page's theme-color meta tag.
+      'BRAND_COLOR' => BrandColor.normalize(account.brand_color),
+      'LOGO' => logo,
+      'LOGO_DARK' => logo,
+      'LOGO_THUMBNAIL' => logo
+    }.compact
+  end
+
   private
 
   attr_reader :account, :inbox
@@ -124,6 +154,16 @@ class Brand
     return nil unless account.brand_logo_email.attached?
 
     Rails.application.routes.url_helpers.rails_blob_url(account.brand_logo_email)
+  end
+
+  # Relative on purpose: the dashboard and the manifest are served from the same host as the
+  # blob, and a path does not depend on default_url_options being set for a web request. The
+  # account's one uploaded image stands in for the dashboard logo, the dark logo and the
+  # favicon thumbnail; a browser renders the raster formats the email logo is limited to.
+  def dashboard_logo_path
+    return nil unless account.brand_logo_email.attached?
+
+    Rails.application.routes.url_helpers.rails_blob_path(account.brand_logo_email, only_path: true)
   end
 
   # Falling back to LOGO covers the installation that already has a raster logo without asking

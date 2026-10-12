@@ -4,6 +4,17 @@ Fork de `fazer-ai/chatwoot` (v4.18.0-fazer-ai.127/128), usado como CRM das clín
 Levantamento de onde a marca (nome, logo, cor) é definida hoje e o que precisa mudar
 para cada clínica (cada uma é uma *account* do Chatwoot) ter a sua.
 
+## Implementado: `branded_dashboard` (branch `medchat/branded-dashboard`)
+
+Camada própria, só no código MIT (nada em `enterprise/`), com fallback total para o comportamento anterior:
+
+- Feature flag de conta `branded_dashboard` (desligada por padrão), no fim da coluna `feature_flags_ext_1`, então os bits das flags existentes não mudam.
+- `Brand#dashboard_config` (`lib/brand.rb`) devolve só o que a conta sobrescreve: nome (`INSTALLATION_NAME`/`BRAND_NAME`), cor (`BRAND_COLOR`, só hex válido) e logo (a imagem de e-mail da conta vira `LOGO`, `LOGO_DARK` e `LOGO_THUMBNAIL`).
+- `DashboardController` mescla isso por cima da configuração global quando a URL é `/app/accounts/:id/...` e a conta ligou a flag. O id vem do caminho, porque a rota `/app/*params` não tem `:account_id`.
+- `ManifestController` aceita `?account_id=` (o layout já aponta o `<link rel="manifest">` para ele quando há marca da conta), então o PWA instalado leva o nome e o ícone da clínica.
+- Os campos são os mesmos de Configurações → Geral → Email branding; não há tela nova.
+- Ainda global: tela de login (sem conta antes do login; precisa de domínio/subdomínio por conta), favicon estático e widget do site.
+
 ## O que já é por conta (não precisa mudar código)
 
 O fork já tem `lib/brand.rb` (`Brand.for(account:)`) e a feature flag `branded_email_templates`.

@@ -279,3 +279,7 @@
   enabled: false
   premium: true
   column: feature_flags_ext_1
+- name: branded_dashboard
+  display_name: Branded Dashboard
+  enabled: false
+  column: feature_flags_ext_1

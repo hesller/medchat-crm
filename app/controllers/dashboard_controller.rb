@@ -30,6 +30,8 @@ class DashboardController < ActionController::Base
     INSTALLATION_PRICING_PLAN
   ].freeze
 
+  ACCOUNT_PATH_PATTERN = %r{\A/app/accounts/(\d+)(?:/|\z)}
+
   before_action :set_application_pack
   before_action :set_global_config
   before_action :set_dashboard_scripts
@@ -48,7 +50,25 @@ class DashboardController < ActionController::Base
   end
 
   def set_global_config
-    @global_config = GlobalConfig.get(*GLOBAL_CONFIG_KEYS).merge(app_config)
+    @global_config = GlobalConfig.get(*GLOBAL_CONFIG_KEYS).merge(app_config).merge(account_brand_config)
+  end
+
+  # The brand of the account in the URL (/app/accounts/:account_id/...), when that account has
+  # opted in. Everything else, including the login page that has no account yet, keeps the
+  # installation brand.
+  def account_brand_config
+    overrides = Brand.for(account: brand_account).dashboard_config
+    @manifest_account_id = brand_account.id if overrides.present?
+    overrides
+  end
+
+  # Read from the path rather than params: the catch-all /app/*params route has no :account_id
+  # segment, and only some of the explicit routes do.
+  def brand_account
+    return @brand_account if defined?(@brand_account)
+
+    account_id = request.path[ACCOUNT_PATH_PATTERN, 1]
+    @brand_account = account_id.present? ? Account.find_by(id: account_id) : nil
   end
 
   def set_dashboard_scripts

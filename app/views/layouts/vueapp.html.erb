@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <link rel="apple-touch-icon" href="<%= @global_config['LOGO_THUMBNAIL'] %>">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/manifest.json<%= "?account_id=#{@manifest_account_id}" if @manifest_account_id %>">
     <% unless ChatwootApp.chatwoot_cloud? %>
       <meta name="robots" content="noindex">
     <% end %>

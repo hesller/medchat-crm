@@ -219,4 +219,63 @@ RSpec.describe Brand do
       expect(described_class.for.config.keys).to match_array(described_class::INSTALLATION_KEYS)
     end
   end
+  describe '#dashboard_config' do
+    it 'is empty without an account' do
+      expect(described_class.for.dashboard_config).to eq({})
+    end
+
+    it 'is empty when the account has not enabled the branded dashboard' do
+      account.update!(brand_name: 'Clinica Exemplo', brand_color: '#11D135')
+
+      expect(described_class.for(account: account).dashboard_config).to eq({})
+    end
+
+    it 'is not unlocked by branded email templates alone' do
+      account.enable_features!('branded_email_templates')
+      account.update!(brand_name: 'Clinica Exemplo')
+
+      expect(described_class.for(account: account).dashboard_config).to eq({})
+    end
+
+    context 'when the account has enabled the branded dashboard' do
+      before { account.enable_features!('branded_dashboard') }
+
+      it 'returns only what the account configured' do
+        account.update!(brand_name: 'Clinica Exemplo')
+
+        expect(described_class.for(account: account).dashboard_config).to eq(
+          'INSTALLATION_NAME' => 'Clinica Exemplo',
+          'BRAND_NAME' => 'Clinica Exemplo'
+        )
+      end
+
+      it 'normalizes the colour and drops one that is not a hex' do
+        account.update!(brand_color: '#abc')
+        expect(described_class.for(account: account).dashboard_config['BRAND_COLOR']).to eq '#AABBCC'
+
+        account.update!(brand_color: 'red')
+        expect(described_class.for(account: account).dashboard_config).not_to have_key('BRAND_COLOR')
+      end
+
+      it 'treats an empty field as unset' do
+        account.update!(brand_name: '')
+
+        expect(described_class.for(account: account).dashboard_config).to eq({})
+      end
+
+      it 'uses the uploaded image as the dashboard logo, dark logo and thumbnail' do
+        account.brand_logo_email.attach(
+          io: Rails.root.join('spec/assets/avatar.png').open,
+          filename: 'avatar.png',
+          content_type: 'image/png'
+        )
+
+        config = described_class.for(account: account).dashboard_config
+
+        expect(config['LOGO']).to start_with('/rails/active_storage/blobs/')
+        expect(config['LOGO_DARK']).to eq config['LOGO']
+        expect(config['LOGO_THUMBNAIL']).to eq config['LOGO']
+      end
+    end
+  end
 end

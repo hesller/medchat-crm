@@ -3,7 +3,7 @@ class ManifestController < ApplicationController
   SVG_MIME = 'image/svg+xml'.freeze
 
   def show
-    config = GlobalConfig.get('INSTALLATION_NAME', 'LOGO_THUMBNAIL', 'BRAND_COLOR')
+    config = GlobalConfig.get('INSTALLATION_NAME', 'LOGO_THUMBNAIL', 'BRAND_COLOR').merge(account_brand_config)
     installation_name = config['INSTALLATION_NAME'].presence || 'Chatwoot'
     logo = config['LOGO_THUMBNAIL'].presence || '/brand-assets/logo_thumbnail.svg'
     brand_color = config['BRAND_COLOR'].presence || '#1f93ff'
@@ -26,6 +26,14 @@ class ManifestController < ApplicationController
   end
 
   private
+
+  # Same opt-in override as the dashboard shell, so an installed PWA wears the clinic's name and
+  # icon. An unknown or non-numeric account_id is ignored and the installation manifest is served.
+  def account_brand_config
+    return {} unless params[:account_id].to_s.match?(/\A\d+\z/)
+
+    Brand.for(account: Account.find_by(id: params[:account_id])).dashboard_config
+  end
 
   def svg?(url)
     File.extname(URI.parse(url).path).casecmp('.svg').zero?
