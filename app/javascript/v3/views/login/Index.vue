@@ -427,16 +427,9 @@ export default {
     <p
       v-if="globalConfig.displayManifest"
       class="mt-8 text-center text-xs text-n-slate-10"
+      data-testid="login_footer"
     >
-      powered by
-      <a
-        href="https://fazer.ai"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-n-slate-11 hover:text-n-brand"
-      >
-        fazer.ai
-      </a>
+      powered by Hexcode
     </p>
     <!-- eslint-enable vue/no-bare-strings-in-template @intlify/vue-i18n/no-raw-text -->
   </main>
