@@ -39,7 +39,12 @@ class AccountDashboard < Administrate::BaseDashboard
     custom_attributes: Field::String,
     hide_agent_unassigned_tab: Field::Boolean,
     hide_agent_all_tab: HideAgentAllTabField,
-    disable_agent_message_deletion: Field::Boolean
+    disable_agent_message_deletion: Field::Boolean,
+    # Per-account switches for the branding features. The "all features" panel that lists every
+    # flag is enterprise-only and is not part of this build, so these two are exposed on their own:
+    # without them an installation has no way to turn either feature on from the UI.
+    feature_branded_dashboard: Field::Boolean,
+    feature_branded_email_templates: Field::Boolean
   }.merge(enterprise_attribute_types).freeze
 
   # COLLECTION_ATTRIBUTES
@@ -80,6 +85,8 @@ class AccountDashboard < Administrate::BaseDashboard
     hide_agent_unassigned_tab
     hide_agent_all_tab
     disable_agent_message_deletion
+    feature_branded_dashboard
+    feature_branded_email_templates
   ] + enterprise_show_page_attributes).freeze
 
   # FORM_ATTRIBUTES
@@ -101,6 +108,8 @@ class AccountDashboard < Administrate::BaseDashboard
     hide_agent_unassigned_tab
     hide_agent_all_tab
     disable_agent_message_deletion
+    feature_branded_dashboard
+    feature_branded_email_templates
   ] + enterprise_form_attributes).freeze
 
   # COLLECTION_FILTERS

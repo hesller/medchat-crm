@@ -25,6 +25,41 @@ RSpec.describe 'Super Admin accounts API', type: :request do
     end
   end
 
+  describe 'branding feature toggles' do
+    before { sign_in(super_admin, scope: :super_admin) }
+
+    it 'offers both switches on the edit form' do
+      get "/super_admin/accounts/#{account.id}/edit"
+
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include('account[feature_branded_dashboard]')
+      expect(response.body).to include('account[feature_branded_email_templates]')
+    end
+
+    it 'turns the features on and off for that account only' do
+      other = create(:account)
+
+      patch "/super_admin/accounts/#{account.id}",
+            params: { account: { feature_branded_dashboard: '1', feature_branded_email_templates: '1' } }
+      expect(account.reload.feature_enabled?(:branded_dashboard)).to be true
+      expect(account.feature_enabled?(:branded_email_templates)).to be true
+      expect(other.reload.feature_enabled?(:branded_dashboard)).to be false
+
+      patch "/super_admin/accounts/#{account.id}",
+            params: { account: { feature_branded_dashboard: '0', feature_branded_email_templates: '1' } }
+      expect(account.reload.feature_enabled?(:branded_dashboard)).to be false
+      expect(account.feature_enabled?(:branded_email_templates)).to be true
+    end
+
+    it 'leaves the other features alone' do
+      account.enable_features!('delayed_automations')
+
+      patch "/super_admin/accounts/#{account.id}", params: { account: { feature_branded_dashboard: '1' } }
+
+      expect(account.reload.feature_enabled?(:delayed_automations)).to be true
+    end
+  end
+
   describe 'GET /super_admin/accounts/{account_id}' do
     context 'when it is an authenticated user' do
       it 'shows effective Captain model routing', if: ChatwootApp.enterprise? do
