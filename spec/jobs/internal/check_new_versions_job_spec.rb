@@ -11,7 +11,7 @@ RSpec.describe Internal::CheckNewVersionsJob do
   describe '#perform' do
     context 'when GitHub API returns successful response' do
       before do
-        stub_request(:get, 'https://api.github.com/repos/fazer-ai/chatwoot/releases/latest')
+        stub_request(:get, 'https://api.github.com/repos/hesller/medchat-crm/releases/latest')
           .to_return(
             status: 200,
             body: { tag_name: 'v1.2.3' }.to_json,
@@ -27,7 +27,7 @@ RSpec.describe Internal::CheckNewVersionsJob do
 
     context 'when tag name has no v prefix' do
       before do
-        stub_request(:get, 'https://api.github.com/repos/fazer-ai/chatwoot/releases/latest')
+        stub_request(:get, 'https://api.github.com/repos/hesller/medchat-crm/releases/latest')
           .to_return(
             status: 200,
             body: { tag_name: '1.2.3' }.to_json,
@@ -39,6 +39,25 @@ RSpec.describe Internal::CheckNewVersionsJob do
         job
 
         expect(Redis::Alfred.get(Redis::Alfred::LATEST_CHATWOOT_VERSION)).to eq '1.2.3'
+      end
+    end
+
+    context 'when VERSION_CHECK_REPO points at another repository' do
+      before do
+        stub_request(:get, 'https://api.github.com/repos/acme/crm-fork/releases/latest')
+          .to_return(
+            status: 200,
+            body: { tag_name: 'v9.9.9' }.to_json,
+            headers: { 'Content-Type' => 'application/json' }
+          )
+      end
+
+      it 'reads the latest release from that repository' do
+        with_modified_env VERSION_CHECK_REPO: 'acme/crm-fork' do
+          job
+        end
+
+        expect(Redis::Alfred.get(Redis::Alfred::LATEST_CHATWOOT_VERSION)).to eq '9.9.9'
       end
     end
 
@@ -59,7 +78,7 @@ RSpec.describe Internal::CheckNewVersionsJob do
 
     context 'when GitHub API returns failed response' do
       before do
-        stub_request(:get, 'https://api.github.com/repos/fazer-ai/chatwoot/releases/latest')
+        stub_request(:get, 'https://api.github.com/repos/hesller/medchat-crm/releases/latest')
           .to_return(status: 404)
         allow(Rails.logger).to receive(:error)
       end
@@ -74,7 +93,7 @@ RSpec.describe Internal::CheckNewVersionsJob do
       let(:error_message) { 'Network timeout' }
 
       before do
-        stub_request(:get, 'https://api.github.com/repos/fazer-ai/chatwoot/releases/latest')
+        stub_request(:get, 'https://api.github.com/repos/hesller/medchat-crm/releases/latest')
           .to_raise(StandardError.new(error_message))
         allow(Rails.logger).to receive(:error)
       end
@@ -92,13 +111,13 @@ RSpec.describe Internal::CheckNewVersionsJob do
 
       it 'does not make any API calls or update redis' do
         expect { job }.not_to change { Redis::Alfred.get(Redis::Alfred::LATEST_CHATWOOT_VERSION) }.from(nil)
-        expect(a_request(:get, 'https://api.github.com/repos/fazer-ai/chatwoot/releases/latest')).not_to have_been_made
+        expect(a_request(:get, 'https://api.github.com/repos/hesller/medchat-crm/releases/latest')).not_to have_been_made
       end
     end
 
     context 'when tag_name is nil' do
       before do
-        stub_request(:get, 'https://api.github.com/repos/fazer-ai/chatwoot/releases/latest')
+        stub_request(:get, 'https://api.github.com/repos/hesller/medchat-crm/releases/latest')
           .to_return(
             status: 200,
             body: { tag_name: nil }.to_json,
