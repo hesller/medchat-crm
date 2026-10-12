@@ -253,7 +253,9 @@ RSpec.describe Brand do
         account.update!(brand_color: '#abc')
         expect(described_class.for(account: account).dashboard_config['BRAND_COLOR']).to eq '#AABBCC'
 
-        account.update!(brand_color: 'red')
+        # The account schema already refuses a non-hex colour; this is the guard for a value that
+        # was stored before that validation existed.
+        allow(account).to receive(:brand_color).and_return('red')
         expect(described_class.for(account: account).dashboard_config).not_to have_key('BRAND_COLOR')
       end
 

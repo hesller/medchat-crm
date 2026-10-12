@@ -114,9 +114,7 @@ class Brand
     {
       'INSTALLATION_NAME' => name,
       'BRAND_NAME' => name,
-      # normalize drops anything that is not a hex colour, so a bad stored value falls back to
-      # the installation instead of reaching the page's theme-color meta tag.
-      'BRAND_COLOR' => BrandColor.normalize(account.brand_color),
+      'BRAND_COLOR' => dashboard_color,
       'LOGO' => logo,
       'LOGO_DARK' => logo,
       'LOGO_THUMBNAIL' => logo
@@ -154,6 +152,14 @@ class Brand
     return nil unless account.brand_logo_email.attached?
 
     Rails.application.routes.url_helpers.rails_blob_url(account.brand_logo_email)
+  end
+
+  # A value that is not a hex colour is dropped rather than defaulted, so a bad stored value
+  # falls back to the installation's colour instead of reaching the theme-color meta tag.
+  # BrandColor.surface is the public way to normalise (#abc becomes #AABBCC).
+  def dashboard_color
+    color = account.brand_color.to_s.strip
+    BrandColor.surface(color) if color.match?(BrandColor::HEX_PATTERN)
   end
 
   # Relative on purpose: the dashboard and the manifest are served from the same host as the
