@@ -219,6 +219,7 @@ RSpec.describe Brand do
       expect(described_class.for.config.keys).to match_array(described_class::INSTALLATION_KEYS)
     end
   end
+
   describe '#dashboard_config' do
     it 'is empty without an account' do
       expect(described_class.for.dashboard_config).to eq({})
