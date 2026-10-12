@@ -51,6 +51,12 @@ RSpec.describe 'Super Admin accounts API', type: :request do
       expect(account.feature_enabled?(:branded_email_templates)).to be true
     end
 
+    it 'sets the host that serves the account login page' do
+      patch "/super_admin/accounts/#{account.id}", params: { account: { brand_host: 'Clinica.Example.com' } }
+
+      expect(account.reload.brand_host).to eq 'clinica.example.com'
+    end
+
     it 'leaves the other features alone' do
       account.enable_features!('delayed_automations')
 

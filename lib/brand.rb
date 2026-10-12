@@ -34,6 +34,16 @@ class Brand
     new(account: account, inbox: inbox)
   end
 
+  # The account whose login page this host serves, or nil. Only the account's own opt-in
+  # (branded_dashboard) makes #dashboard_config return anything, so a host stored on an account
+  # that never enabled it changes nothing.
+  def self.account_for_host(host)
+    value = host.to_s.strip.downcase
+    return nil if value.blank?
+
+    Account.where("settings ->> 'brand_host' = ?", value).first
+  end
+
   def initialize(account: nil, inbox: nil)
     @account = account
     @inbox = inbox

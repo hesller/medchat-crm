@@ -45,6 +45,16 @@ describe 'GET /manifest.json', type: :request do
     expect(manifest['theme_color']).to eq '#0F766E'
   end
 
+  it 'serves the account brand to the account host when no account_id is given' do
+    account.enable_features!('branded_dashboard')
+    account.update!(brand_name: 'Clinica Exemplo', brand_host: 'clinica.example.com')
+
+    host! 'clinica.example.com'
+    get '/manifest.json'
+
+    expect(manifest['name']).to eq 'Clinica Exemplo'
+  end
+
   it 'ignores a non-numeric or unknown account_id' do
     get '/manifest.json', params: { account_id: 'abc' }
     expect(manifest['name']).to eq 'Chatwoot'

@@ -661,4 +661,32 @@ RSpec.describe Account do
       end
     end
   end
+
+  describe 'brand_host' do
+    let(:account) { create(:account) }
+
+    it 'is normalised to lowercase without spaces' do
+      account.update!(brand_host: '  Clinica.Example.com ')
+
+      expect(account.reload.brand_host).to eq 'clinica.example.com'
+    end
+
+    it 'accepts a blank value' do
+      expect(account.update(brand_host: '')).to be true
+    end
+
+    it 'rejects a value that is not a hostname' do
+      ['http://clinica.example.com', 'clinica', 'clinica.example.com/app', 'a b.example.com'].each do |value|
+        expect(account.update(brand_host: value)).to be(false), "expected #{value.inspect} to be rejected"
+        expect(account.errors[:brand_host]).to be_present
+      end
+    end
+
+    it 'rejects a host another account already serves' do
+      create(:account).update!(brand_host: 'clinica.example.com')
+
+      expect(account.update(brand_host: 'Clinica.example.com')).to be false
+      expect(account.errors[:brand_host]).to be_present
+    end
+  end
 end

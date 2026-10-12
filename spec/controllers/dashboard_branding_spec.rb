@@ -45,6 +45,65 @@ describe 'Dashboard branding per account', type: :request do
       expect(response.body).to include '<link rel="manifest" href="/manifest.json">'
     end
 
+    it 'serves the account brand on the login page of the account host' do
+      account.update!(brand_host: 'clinica.example.com')
+
+      host! 'clinica.example.com'
+      get '/app/login'
+
+      expect(response.body).to include 'Clinica Exemplo'
+      expect(response.body).to include "/manifest.json?account_id=#{account.id}"
+    end
+
+    it 'keeps the installation brand on the login page of any other host' do
+      account.update!(brand_host: 'clinica.example.com')
+
+      host! 'outra.example.com'
+      get '/app/login'
+
+      expect(response.body).not_to include 'Clinica Exemplo'
+    end
+
+    it 'lets the account in the path win over the host' do
+      other = create(:account)
+      other.enable_features!('branded_dashboard')
+      other.update!(brand_name: 'Outra Clinica', brand_host: 'outra.example.com')
+
+      host! 'outra.example.com'
+      get "/app/accounts/#{account.id}/dashboard"
+
+      expect(response.body).to include 'Clinica Exemplo'
+      expect(response.body).not_to include 'Outra Clinica'
+    end
+
+    context 'with a logo uploaded' do
+      before do
+        account.brand_logo_email.attach(
+          io: Rails.root.join('spec/assets/avatar.png').open,
+          filename: 'avatar.png',
+          content_type: 'image/png'
+        )
+      end
+
+      it 'uses the account logo as the favicon instead of the Chatwoot files' do
+        install('DISPLAY_MANIFEST' => true)
+
+        get "/app/accounts/#{account.id}/dashboard"
+
+        expect(response.body).to include '/rails/active_storage/blobs/'
+        expect(response.body).not_to include '/favicon-32x32.png'
+        expect(response.body).not_to include '/favicon-16x16.png'
+      end
+    end
+
+    it 'keeps the Chatwoot favicons while the account has no logo' do
+      install('DISPLAY_MANIFEST' => true)
+
+      get "/app/accounts/#{account.id}/dashboard"
+
+      expect(response.body).to include '/favicon-32x32.png'
+    end
+
     it 'ignores an account id that does not exist' do
       get '/app/accounts/999999/dashboard'
 

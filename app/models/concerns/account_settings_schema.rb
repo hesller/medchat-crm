@@ -24,6 +24,7 @@ module AccountSettingsSchema
         'brand_name': { 'type': %w[string null], 'maxLength': 255 },
         'brand_url': { 'type': %w[string null], 'maxLength': 2000 },
         'brand_color': { 'type': %w[string null], 'pattern': '^(#(\\h{3}|\\h{6}))?$' },
+        'brand_host': { 'type': %w[string null], 'maxLength': 253 },
         'conversation_required_attributes': {
           'type': %w[array null],
           'items': { 'type': 'string' }

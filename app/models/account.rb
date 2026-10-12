@@ -60,6 +60,8 @@ class Account < ApplicationRecord # rubocop:disable Metrics/ClassLength
   validate :validate_brand_logo_email, if: -> { brand_logo_email.changed? }
   validate :validate_brand_url, if: -> { will_save_change_to_settings? }
   validate :validate_brand_name, if: -> { will_save_change_to_settings? }
+  before_validation :normalize_brand_host, if: -> { will_save_change_to_settings? }
+  validate :validate_brand_host, if: -> { will_save_change_to_settings? }
 
   store_accessor :settings, :auto_resolve_after, :auto_resolve_message, :auto_resolve_ignore_waiting
 
@@ -68,8 +70,10 @@ class Account < ApplicationRecord # rubocop:disable Metrics/ClassLength
   store_accessor :settings, :reporting_timezone
   store_accessor :settings, :keep_pending_on_bot_failure
   store_accessor :settings, :captain_auto_resolve_mode, :captain_false_promise_harness_enabled
-  # Email only. The dashboard, favicon and PWA stay on the installation's brand; see Brand.
-  store_accessor :settings, :brand_name, :brand_url, :brand_color
+  # Email, plus the dashboard, favicon, PWA manifest and login page when the account enables
+  # branded_dashboard. brand_host is the hostname that serves this account's login page: before a
+  # user signs in, the host is all there is to say which account's brand to show. See Brand.
+  store_accessor :settings, :brand_name, :brand_url, :brand_color, :brand_host
   include AccountAgentRestrictions
   include AccountWhatsappProviders
   include AccountCaptainAutoResolve
@@ -262,6 +266,26 @@ class Account < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # to_s because settings is jsonb and strong parameters keep a JSON scalar's type: a
   # {"brand_name": 123} would otherwise reach match? as an Integer and turn a validation
   # error into a 500. The schema validator flags the type, but it does not halt the chain.
+  BRAND_HOST_PATTERN = /\A(?=.{1,253}\z)[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?(\.[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)+\z/
+
+  def normalize_brand_host
+    return if settings.blank? || settings['brand_host'].blank?
+
+    settings['brand_host'] = settings['brand_host'].to_s.strip.downcase
+  end
+
+  # One host serves one account's login page, so a value another account already holds would
+  # make the page show whichever of them the query happened to return.
+  def validate_brand_host
+    return if brand_host.blank?
+
+    value = brand_host.to_s
+    return errors.add(:brand_host, I18n.t('errors.account.brand_host.invalid')) unless value.match?(BRAND_HOST_PATTERN)
+
+    taken = Account.where.not(id: id).exists?(["settings ->> 'brand_host' = ?", value])
+    errors.add(:brand_host, I18n.t('errors.account.brand_host.taken')) if taken
+  end
+
   def validate_brand_name
     return if brand_name.blank?
     return unless brand_name.to_s.match?(/[<>]/)

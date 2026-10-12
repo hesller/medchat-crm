@@ -220,6 +220,20 @@ RSpec.describe Brand do
     end
   end
 
+  describe '.account_for_host' do
+    it 'finds the account that serves the host, ignoring case and spaces' do
+      account.update!(brand_host: 'clinica.example.com')
+
+      expect(described_class.account_for_host(' Clinica.Example.com ')).to eq account
+    end
+
+    it 'is nil for an unknown or blank host' do
+      expect(described_class.account_for_host('outra.example.com')).to be_nil
+      expect(described_class.account_for_host('')).to be_nil
+      expect(described_class.account_for_host(nil)).to be_nil
+    end
+  end
+
   describe '#dashboard_config' do
     it 'is empty without an account' do
       expect(described_class.for.dashboard_config).to eq({})

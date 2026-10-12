@@ -44,7 +44,8 @@ class AccountDashboard < Administrate::BaseDashboard
     # flag is enterprise-only and is not part of this build, so these two are exposed on their own:
     # without them an installation has no way to turn either feature on from the UI.
     feature_branded_dashboard: Field::Boolean,
-    feature_branded_email_templates: Field::Boolean
+    feature_branded_email_templates: Field::Boolean,
+    brand_host: Field::String
   }.merge(enterprise_attribute_types).freeze
 
   # COLLECTION_ATTRIBUTES
@@ -87,6 +88,7 @@ class AccountDashboard < Administrate::BaseDashboard
     disable_agent_message_deletion
     feature_branded_dashboard
     feature_branded_email_templates
+    brand_host
   ] + enterprise_show_page_attributes).freeze
 
   # FORM_ATTRIBUTES
@@ -110,6 +112,7 @@ class AccountDashboard < Administrate::BaseDashboard
     disable_agent_message_deletion
     feature_branded_dashboard
     feature_branded_email_templates
+    brand_host
   ] + enterprise_form_attributes).freeze
 
   # COLLECTION_FILTERS

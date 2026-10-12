@@ -30,9 +30,15 @@ class ManifestController < ApplicationController
   # Same opt-in override as the dashboard shell, so an installed PWA wears the clinic's name and
   # icon. An unknown or non-numeric account_id is ignored and the installation manifest is served.
   def account_brand_config
-    return {} unless params[:account_id].to_s.match?(/\A\d+\z/)
+    Brand.for(account: brand_account).dashboard_config
+  end
 
-    Brand.for(account: Account.find_by(id: params[:account_id])).dashboard_config
+  # account_id when the page that links the manifest knows the account; otherwise the host, so
+  # an installed PWA opened from a clinic's own domain wears that clinic's name and icon.
+  def brand_account
+    return Account.find_by(id: params[:account_id]) if params[:account_id].to_s.match?(/\A\d+\z/)
+
+    Brand.account_for_host(request.host)
   end
 
   def svg?(url)

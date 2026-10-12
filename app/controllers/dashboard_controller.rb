@@ -58,7 +58,12 @@ class DashboardController < ActionController::Base
   # installation brand.
   def account_brand_config
     overrides = Brand.for(account: brand_account).dashboard_config
-    @manifest_account_id = brand_account.id if overrides.present?
+    return {} if overrides.blank?
+
+    @manifest_account_id = brand_account.id
+    # The favicon follows the account's logo. The static Chatwoot favicons would otherwise win
+    # over the 512px link, since a browser prefers the smaller sizes it finds first.
+    @brand_icon = overrides['LOGO_THUMBNAIL']
     overrides
   end
 
@@ -68,7 +73,9 @@ class DashboardController < ActionController::Base
     return @brand_account if defined?(@brand_account)
 
     account_id = request.path[ACCOUNT_PATH_PATTERN, 1]
-    @brand_account = account_id.present? ? Account.find_by(id: account_id) : nil
+    # With an account in the path it decides. Without one (the login page, and any page before the
+    # user picks an account) the host does.
+    @brand_account = account_id.present? ? Account.find_by(id: account_id) : Brand.account_for_host(request.host)
   end
 
   def set_dashboard_scripts

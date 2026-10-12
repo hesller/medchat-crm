@@ -21,6 +21,9 @@ pt_BR:
         invalid: não pode conter < ou >
       brand_url:
         invalid: precisa começar com http:// ou https://
+      brand_host:
+        invalid: não é um domínio válido
+        taken: já é usado por outra conta
       brand_logo_email:
         too_big: tem mais de 2 MB
         invalid_format: precisa ser PNG, JPG ou GIF
