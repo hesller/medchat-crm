@@ -1,0 +1,73 @@
+{
+  "PIPELINE": {
+    "TITLE": "Pipeline",
+    "SELECT_PIPELINE": "Select pipeline",
+    "NEW_PIPELINE": "New pipeline",
+    "EMPTY": {
+      "TITLE": "No pipelines yet",
+      "ADMIN_DESCRIPTION": "Create a pipeline to track your conversations through stages, from first contact to close.",
+      "AGENT_DESCRIPTION": "Ask an administrator to create the first pipeline for this account."
+    },
+    "DEFAULT_STAGES": {
+      "NEW": "New",
+      "IN_PROGRESS": "In progress",
+      "WON": "Won",
+      "LOST": "Lost"
+    },
+    "PIPELINE_DIALOG": {
+      "CREATE_TITLE": "New pipeline",
+      "EDIT_TITLE": "Rename pipeline",
+      "CREATE_DESCRIPTION": "The pipeline starts with the stages New, In progress, Won and Lost. You can change them later.",
+      "NAME_LABEL": "Name",
+      "NAME_PLACEHOLDER": "E.g. Appointments",
+      "CREATE": "Create",
+      "SAVE": "Save"
+    },
+    "STAGE_DIALOG": {
+      "CREATE_TITLE": "New stage",
+      "EDIT_TITLE": "Edit stage",
+      "NAME_LABEL": "Name",
+      "NAME_PLACEHOLDER": "E.g. Proposal sent",
+      "COLOR_LABEL": "Color",
+      "CREATE": "Create",
+      "SAVE": "Save"
+    },
+    "ACTIONS": {
+      "ADD_STAGE": "New stage",
+      "RENAME_PIPELINE": "Rename",
+      "DELETE_PIPELINE": "Delete pipeline",
+      "EDIT_STAGE": "Edit stage",
+      "DELETE_STAGE": "Delete stage",
+      "MOVE_STAGE_LEFT": "Move stage left",
+      "MOVE_STAGE_RIGHT": "Move stage right",
+      "ADD_CONVERSATION": "Add conversation",
+      "REMOVE_CARD": "Remove from pipeline"
+    },
+    "DELETE_PIPELINE_CONFIRM": {
+      "TITLE": "Delete the pipeline {name}?",
+      "DESCRIPTION": "Its stages and cards will be deleted. The conversations are not affected.",
+      "CONFIRM": "Delete"
+    },
+    "DELETE_STAGE_CONFIRM": {
+      "TITLE": "Delete the stage {name}?",
+      "DESCRIPTION": "Its cards leave the pipeline. The conversations are not affected.",
+      "CONFIRM": "Delete"
+    },
+    "ADD_CONVERSATION": {
+      "TITLE": "Add conversation",
+      "DESCRIPTION": "Search by conversation number, contact name or phone.",
+      "SEARCH_PLACEHOLDER": "Search conversations",
+      "NO_RESULTS": "No conversations found",
+      "ALREADY_ADDED": "Already in the pipeline"
+    },
+    "CARD": {
+      "UNASSIGNED": "Unassigned"
+    },
+    "STAGE_EMPTY": "Drag conversations here",
+    "ERRORS": {
+      "LOAD": "Could not load the pipeline",
+      "SAVE": "Could not save your changes",
+      "MOVE": "Could not move the card"
+    }
+  }
+}

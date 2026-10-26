@@ -1,0 +1,73 @@
+{
+  "PIPELINE": {
+    "TITLE": "Pipeline",
+    "SELECT_PIPELINE": "Seleccionar pipeline",
+    "NEW_PIPELINE": "Nueva pipeline",
+    "EMPTY": {
+      "TITLE": "Aún no hay pipelines",
+      "ADMIN_DESCRIPTION": "Crea una pipeline para seguir tus conversaciones por etapas, desde el primer contacto hasta el cierre.",
+      "AGENT_DESCRIPTION": "Pide a un administrador que cree la primera pipeline de esta cuenta."
+    },
+    "DEFAULT_STAGES": {
+      "NEW": "Nuevo",
+      "IN_PROGRESS": "En curso",
+      "WON": "Ganado",
+      "LOST": "Perdido"
+    },
+    "PIPELINE_DIALOG": {
+      "CREATE_TITLE": "Nueva pipeline",
+      "EDIT_TITLE": "Renombrar pipeline",
+      "CREATE_DESCRIPTION": "La pipeline empieza con las etapas Nuevo, En curso, Ganado y Perdido. Puedes cambiarlas después.",
+      "NAME_LABEL": "Nombre",
+      "NAME_PLACEHOLDER": "Ej.: Citas",
+      "CREATE": "Crear",
+      "SAVE": "Guardar"
+    },
+    "STAGE_DIALOG": {
+      "CREATE_TITLE": "Nueva etapa",
+      "EDIT_TITLE": "Editar etapa",
+      "NAME_LABEL": "Nombre",
+      "NAME_PLACEHOLDER": "Ej.: Propuesta enviada",
+      "COLOR_LABEL": "Color",
+      "CREATE": "Crear",
+      "SAVE": "Guardar"
+    },
+    "ACTIONS": {
+      "ADD_STAGE": "Nueva etapa",
+      "RENAME_PIPELINE": "Renombrar",
+      "DELETE_PIPELINE": "Eliminar pipeline",
+      "EDIT_STAGE": "Editar etapa",
+      "DELETE_STAGE": "Eliminar etapa",
+      "MOVE_STAGE_LEFT": "Mover etapa a la izquierda",
+      "MOVE_STAGE_RIGHT": "Mover etapa a la derecha",
+      "ADD_CONVERSATION": "Añadir conversación",
+      "REMOVE_CARD": "Quitar de la pipeline"
+    },
+    "DELETE_PIPELINE_CONFIRM": {
+      "TITLE": "¿Eliminar la pipeline {name}?",
+      "DESCRIPTION": "Se eliminarán sus etapas y tarjetas. Las conversaciones no se ven afectadas.",
+      "CONFIRM": "Eliminar"
+    },
+    "DELETE_STAGE_CONFIRM": {
+      "TITLE": "¿Eliminar la etapa {name}?",
+      "DESCRIPTION": "Sus tarjetas salen de la pipeline. Las conversaciones no se ven afectadas.",
+      "CONFIRM": "Eliminar"
+    },
+    "ADD_CONVERSATION": {
+      "TITLE": "Añadir conversación",
+      "DESCRIPTION": "Busca por número de conversación, nombre o teléfono del contacto.",
+      "SEARCH_PLACEHOLDER": "Buscar conversaciones",
+      "NO_RESULTS": "No se encontraron conversaciones",
+      "ALREADY_ADDED": "Ya está en la pipeline"
+    },
+    "CARD": {
+      "UNASSIGNED": "Sin asignar"
+    },
+    "STAGE_EMPTY": "Arrastra conversaciones aquí",
+    "ERRORS": {
+      "LOAD": "No se pudo cargar la pipeline",
+      "SAVE": "No se pudieron guardar los cambios",
+      "MOVE": "No se pudo mover la tarjeta"
+    }
+  }
+}

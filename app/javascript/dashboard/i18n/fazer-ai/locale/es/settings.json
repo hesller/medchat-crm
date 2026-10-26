@@ -52,6 +52,7 @@
   "SIDEBAR": {
     "INTERNAL_CHAT": "Chat interno",
     "KANBAN": "Kanban",
+    "PIPELINE": "Pipeline",
     "APPS": "Apps"
   },
   "KEYBOARD_SHORTCUTS": {

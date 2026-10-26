@@ -158,6 +158,7 @@ class Conversation < ApplicationRecord
   has_many :scheduled_messages, dependent: :destroy
   has_many :recurring_scheduled_messages, dependent: :destroy
   has_many :automation_rule_pending_executions, dependent: :delete_all
+  has_many :pipeline_items, dependent: :delete_all
 
   before_save :ensure_snooze_until_reset
   before_save :set_status_changed_at

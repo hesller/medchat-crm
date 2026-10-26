@@ -401,6 +401,12 @@ Rails.application.routes.draw do
             end
           end
           resources :labels, only: [:index, :show, :create, :update, :destroy]
+          resources :pipelines, only: [:index, :show, :create, :update, :destroy] do
+            scope module: :pipelines do
+              resources :stages, only: [:create, :update, :destroy]
+              resources :items, only: [:create, :update, :destroy]
+            end
+          end
 
           resources :notifications, only: [:index, :update, :destroy] do
             collection do

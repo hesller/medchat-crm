@@ -1,0 +1,73 @@
+{
+  "PIPELINE": {
+    "TITLE": "Pipeline",
+    "SELECT_PIPELINE": "Selecionar pipeline",
+    "NEW_PIPELINE": "Nova pipeline",
+    "EMPTY": {
+      "TITLE": "Nenhuma pipeline ainda",
+      "ADMIN_DESCRIPTION": "Crie uma pipeline para acompanhar suas conversas por etapas, do primeiro contato ao fechamento.",
+      "AGENT_DESCRIPTION": "Peça a um administrador para criar a primeira pipeline desta conta."
+    },
+    "DEFAULT_STAGES": {
+      "NEW": "Novo",
+      "IN_PROGRESS": "Em andamento",
+      "WON": "Ganho",
+      "LOST": "Perdido"
+    },
+    "PIPELINE_DIALOG": {
+      "CREATE_TITLE": "Nova pipeline",
+      "EDIT_TITLE": "Renomear pipeline",
+      "CREATE_DESCRIPTION": "A pipeline começa com as etapas Novo, Em andamento, Ganho e Perdido. Você pode mudá-las depois.",
+      "NAME_LABEL": "Nome",
+      "NAME_PLACEHOLDER": "Ex.: Agendamentos",
+      "CREATE": "Criar",
+      "SAVE": "Salvar"
+    },
+    "STAGE_DIALOG": {
+      "CREATE_TITLE": "Nova etapa",
+      "EDIT_TITLE": "Editar etapa",
+      "NAME_LABEL": "Nome",
+      "NAME_PLACEHOLDER": "Ex.: Proposta enviada",
+      "COLOR_LABEL": "Cor",
+      "CREATE": "Criar",
+      "SAVE": "Salvar"
+    },
+    "ACTIONS": {
+      "ADD_STAGE": "Nova etapa",
+      "RENAME_PIPELINE": "Renomear",
+      "DELETE_PIPELINE": "Excluir pipeline",
+      "EDIT_STAGE": "Editar etapa",
+      "DELETE_STAGE": "Excluir etapa",
+      "MOVE_STAGE_LEFT": "Mover etapa para a esquerda",
+      "MOVE_STAGE_RIGHT": "Mover etapa para a direita",
+      "ADD_CONVERSATION": "Adicionar conversa",
+      "REMOVE_CARD": "Remover da pipeline"
+    },
+    "DELETE_PIPELINE_CONFIRM": {
+      "TITLE": "Excluir a pipeline {name}?",
+      "DESCRIPTION": "As etapas e os cartões desta pipeline serão excluídos. As conversas não são afetadas.",
+      "CONFIRM": "Excluir"
+    },
+    "DELETE_STAGE_CONFIRM": {
+      "TITLE": "Excluir a etapa {name}?",
+      "DESCRIPTION": "Os cartões desta etapa saem da pipeline. As conversas não são afetadas.",
+      "CONFIRM": "Excluir"
+    },
+    "ADD_CONVERSATION": {
+      "TITLE": "Adicionar conversa",
+      "DESCRIPTION": "Busque pelo número da conversa, nome ou telefone do contato.",
+      "SEARCH_PLACEHOLDER": "Buscar conversas",
+      "NO_RESULTS": "Nenhuma conversa encontrada",
+      "ALREADY_ADDED": "Já está na pipeline"
+    },
+    "CARD": {
+      "UNASSIGNED": "Sem responsável"
+    },
+    "STAGE_EMPTY": "Arraste conversas para cá",
+    "ERRORS": {
+      "LOAD": "Não foi possível carregar a pipeline",
+      "SAVE": "Não foi possível salvar as alterações",
+      "MOVE": "Não foi possível mover o cartão"
+    }
+  }
+}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_10_11_120000) do
+ActiveRecord::Schema[7.2].define(version: 2026_10_26_010000) do
   # These extensions should be enabled to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -1553,6 +1553,40 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_11_120000) do
     t.index ["secondary_actor_type", "secondary_actor_id"], name: "uniq_secondary_actor_per_account_notifications"
     t.index ["user_id", "account_id", "snoozed_until", "read_at"], name: "idx_notifications_performance"
     t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "pipeline_items", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "pipeline_id", null: false
+    t.bigint "pipeline_stage_id", null: false
+    t.bigint "conversation_id", null: false
+    t.integer "position", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_pipeline_items_on_account_id"
+    t.index ["conversation_id"], name: "index_pipeline_items_on_conversation_id"
+    t.index ["pipeline_id", "conversation_id"], name: "index_pipeline_items_on_pipeline_id_and_conversation_id", unique: true
+    t.index ["pipeline_stage_id", "position"], name: "index_pipeline_items_on_pipeline_stage_id_and_position"
+  end
+
+  create_table "pipeline_stages", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "pipeline_id", null: false
+    t.string "name", null: false
+    t.string "color", default: "#1f93ff", null: false
+    t.integer "position", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_pipeline_stages_on_account_id"
+    t.index ["pipeline_id", "position"], name: "index_pipeline_stages_on_pipeline_id_and_position"
+  end
+
+  create_table "pipelines", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id", "name"], name: "index_pipelines_on_account_id_and_name", unique: true
   end
 
   create_table "platform_app_permissibles", force: :cascade do |t|
