@@ -44,7 +44,7 @@ const emit = defineEmits([
   'closeMobileSidebar',
 ]);
 
-const { accountScopedRoute, isOnChatwootCloud } = useAccount();
+const { accountScopedRoute, isOnChatwootCloud, currentAccount } = useAccount();
 const { isEnterprise } = useConfig();
 const store = useStore();
 
@@ -93,6 +93,11 @@ const hasFilteredUnreadCounts = computed(() => {
     )
   );
 });
+
+// A superadmin enables the pipeline per account, according to its plan.
+const isPipelineEnabled = computed(
+  () => !!currentAccount.value?.settings?.pipeline_enabled
+);
 
 const hasDataImport = computed(() => {
   return isFeatureEnabledonAccount.value(
@@ -527,13 +532,17 @@ const menuItems = computed(() => {
         count: 'internalChat/getUnreadCount',
       },
     },
-    {
-      name: 'Kanban',
-      label: t('SIDEBAR.KANBAN'),
-      icon: 'i-lucide-columns-3',
-      to: accountScopedRoute('kanban_view'),
-      activeOn: ['kanban_view'],
-    },
+    ...(isPipelineEnabled.value
+      ? [
+          {
+            name: 'Pipeline',
+            label: t('SIDEBAR.PIPELINE'),
+            icon: 'i-lucide-columns-3',
+            to: accountScopedRoute('pipeline_view'),
+            activeOn: ['pipeline_view'],
+          },
+        ]
+      : []),
     {
       name: 'Captain',
       icon: 'i-woot-captain',

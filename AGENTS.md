@@ -207,7 +207,7 @@ Both are deep-merged on top of upstream's: the frontend in `i18n/index.js` via `
 
 **Which file does a key go in?**
 
-- A namespace that is entirely ours gets its own file: `kanban.json`, `internalChat.json`, `groups.json`, `scheduledMessages.json`, `fazerAi.json`.
+- A namespace that is entirely ours gets its own file: `pipeline.json`, `internalChat.json`, `groups.json`, `scheduledMessages.json`, `fazerAi.json`.
 - A key we add *inside* an upstream namespace goes in a file named after the upstream file it extends: `INBOX_MGMT.ADD.WHATSAPP.*` → `fazer-ai/locale/en/inboxMgmt.json`.
 - Replacing an upstream string goes in `overrides.json`, and only there. Overrides apply per language: overriding in `en` does not change `es`, and they are exempt from the coverage rule, since fixing upstream's English says nothing about whether its Spanish needs fixing too.
 

@@ -167,6 +167,19 @@ RSpec.describe 'Super Admin accounts API', type: :request do
     end
   end
 
+  describe 'PATCH /super_admin/accounts/{account_id} pipeline toggle' do
+    it 'enables and disables the pipeline for the account' do
+      sign_in(super_admin, scope: :super_admin)
+      base = { name: account.name, locale: account.locale, status: account.status }
+
+      patch "/super_admin/accounts/#{account.id}", params: { account: base.merge(pipeline_enabled: '1') }
+      expect(account.reload.settings['pipeline_enabled']).to be true
+
+      patch "/super_admin/accounts/#{account.id}", params: { account: base.merge(pipeline_enabled: '0') }
+      expect(account.reload.settings['pipeline_enabled']).to be false
+    end
+  end
+
   describe 'POST /super_admin/accounts/{account_id}/reset_cache' do
     before do
       create(:label, account: account)

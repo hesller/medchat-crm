@@ -70,6 +70,8 @@ class Account < ApplicationRecord # rubocop:disable Metrics/ClassLength
   store_accessor :settings, :captain_auto_resolve_mode, :captain_false_promise_harness_enabled
   # Email only. The dashboard, favicon and PWA stay on the installation's brand; see Brand.
   store_accessor :settings, :brand_name, :brand_url, :brand_color
+  # Turned on per account by a superadmin, according to the account's plan.
+  store_accessor :settings, :pipeline_enabled
   include AccountAgentRestrictions
   include AccountWhatsappProviders
   include AccountCaptainAutoResolve
@@ -111,6 +113,7 @@ class Account < ApplicationRecord # rubocop:disable Metrics/ClassLength
   has_many :notes, dependent: :destroy_async
   has_many :notification_settings, dependent: :destroy_async
   has_many :notifications, dependent: :destroy_async
+  has_many :pipelines, dependent: :destroy_async
   has_many :portals, dependent: :destroy_async, class_name: '::Portal'
   has_many :scheduled_messages, dependent: :destroy_async
   has_many :recurring_scheduled_messages, dependent: :destroy_async
@@ -195,6 +198,11 @@ class Account < ApplicationRecord # rubocop:disable Metrics/ClassLength
     # we need to extract the language code from the locale
     account_locale = locale&.split('_')&.first
     ISO_639.find(account_locale)&.english_name&.downcase || 'english'
+  end
+
+  # The superadmin form posts "1"/"0" and the settings JSON schema only accepts booleans.
+  def pipeline_enabled=(value)
+    super(ActiveModel::Type::Boolean.new.cast(value))
   end
 
   def onboarding_step
