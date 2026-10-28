@@ -5,7 +5,7 @@ RSpec.describe 'Professionals API', type: :request do
   let(:admin) { create(:user, account: account, role: :administrator) }
   let(:agent) { create(:user, account: account, role: :agent) }
   let!(:cardiologist) { create(:professional, account: account, name: 'Dr. Carlos', specialty: 'Cardiologia') }
-  let!(:inactive_dermatologist) { create(:professional, account: account, name: 'Dra. Ana', specialty: 'Dermatologia', active: false) }
+  let(:inactive_dermatologist) { create(:professional, account: account, name: 'Dra. Ana', specialty: 'Dermatologia', active: false) }
 
   describe 'GET /api/v1/accounts/{account.id}/professionals' do
     it 'returns unauthorized for an unauthenticated user' do
@@ -15,6 +15,7 @@ RSpec.describe 'Professionals API', type: :request do
     end
 
     it 'lets an agent list the professionals of the account only' do
+      inactive_dermatologist
       create(:professional, name: 'Dr. Outra Conta')
 
       get "/api/v1/accounts/#{account.id}/professionals", headers: agent.create_new_auth_token, as: :json
@@ -24,6 +25,7 @@ RSpec.describe 'Professionals API', type: :request do
     end
 
     it 'filters by active and specialty' do
+      inactive_dermatologist
       get "/api/v1/accounts/#{account.id}/professionals",
           params: { active: 'true', specialty: 'Cardiologia' },
           headers: agent.create_new_auth_token, as: :json

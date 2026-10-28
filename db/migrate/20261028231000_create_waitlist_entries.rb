@@ -19,6 +19,6 @@ class CreateWaitlistEntries < ActiveRecord::Migration[7.2]
     add_index :waitlist_entries, [:contact_id, :status]
     add_index :waitlist_entries, :offer_expires_at, where: 'status = 1'
     add_index :waitlist_entries, [:offered_professional_id, :offered_slot_starts_at], unique: true, where: 'status = 1',
-                                                                                       name: 'index_waitlist_entries_on_active_offer_slot'
+                                                                                      name: 'index_waitlist_entries_on_active_offer_slot'
   end
 end
