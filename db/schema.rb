@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_10_28_230000) do
+ActiveRecord::Schema[7.2].define(version: 2026_10_28_231000) do
   # These extensions should be enabled to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -1899,6 +1899,26 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_28_230000) do
     t.index ["pubsub_token"], name: "index_users_on_pubsub_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
+  end
+
+  create_table "waitlist_entries", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "contact_id", null: false
+    t.bigint "professional_id"
+    t.bigint "offered_professional_id"
+    t.string "specialty", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "expires_at", null: false
+    t.datetime "offered_at"
+    t.datetime "offered_slot_starts_at"
+    t.datetime "offer_expires_at"
+    t.jsonb "declined_slots", default: [], null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id", "status", "specialty"], name: "index_waitlist_entries_on_account_id_and_status_and_specialty"
+    t.index ["contact_id", "status"], name: "index_waitlist_entries_on_contact_id_and_status"
+    t.index ["offer_expires_at"], name: "index_waitlist_entries_on_offer_expires_at", where: "(status = 1)"
+    t.index ["offered_professional_id", "offered_slot_starts_at"], name: "index_waitlist_entries_on_active_offer_slot", unique: true, where: "(status = 1)"
   end
 
   create_table "webhooks", force: :cascade do |t|
