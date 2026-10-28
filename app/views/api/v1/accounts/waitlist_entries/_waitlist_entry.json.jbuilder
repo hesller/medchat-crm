@@ -8,13 +8,17 @@ json.contact do
   json.name entry.contact.name
   json.phone_number entry.contact.phone_number
 end
-json.professional do
-  json.partial! 'api/v1/accounts/professionals/professional', professional: entry.professional
-end if entry.professional
-json.offer do
+if entry.professional
   json.professional do
-    json.partial! 'api/v1/accounts/professionals/professional', professional: entry.offered_professional
+    json.partial! 'api/v1/accounts/professionals/professional', professional: entry.professional
   end
-  json.slot_starts_at entry.offered_slot_starts_at
-  json.expires_at entry.offer_expires_at
-end if entry.offered?
+end
+if entry.offered?
+  json.offer do
+    json.professional do
+      json.partial! 'api/v1/accounts/professionals/professional', professional: entry.offered_professional
+    end
+    json.slot_starts_at entry.offered_slot_starts_at
+    json.expires_at entry.offer_expires_at
+  end
+end

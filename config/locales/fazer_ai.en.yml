@@ -192,4 +192,5 @@ en:
               quiet_hours: Offers cannot be made during the quiet hours configured for this account
               offer_expired: This offer has already expired
             offered_slot_starts_at:
+              taken: This slot was already offered to another patient
               declined: This patient already declined this slot

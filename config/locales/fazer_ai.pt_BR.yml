@@ -192,4 +192,5 @@ pt_BR:
               quiet_hours: Não é possível fazer ofertas no horário de silêncio configurado para esta conta
               offer_expired: Esta oferta já expirou
             offered_slot_starts_at:
+              taken: Este horário já foi oferecido a outro paciente
               declined: Este paciente já recusou este horário

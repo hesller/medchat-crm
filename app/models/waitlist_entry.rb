@@ -35,7 +35,11 @@ class WaitlistEntry < ApplicationRecord
   validates :specialty, presence: true
   validate :contact_and_professional_belong_to_account
   validate :single_queued_entry, on: :create
-  validate :offer_allowed, if: -> { offered? && will_save_change_to_status? }
+  with_options if: -> { offered? && will_save_change_to_status? } do
+    validate :offer_allowed
+    validate :offer_slot_free
+    validate :outside_quiet_hours
+  end
 
   before_validation :inherit_specialty, :set_expiry, on: :create
 
@@ -108,6 +112,14 @@ class WaitlistEntry < ApplicationRecord
 
     errors.add(:offered_professional, :invalid) unless fits_request?
     errors.add(:offered_slot_starts_at, :declined) if declined_slots.include?(self.class.slot_key(offered_professional, offered_slot_starts_at))
+  end
+
+  def offer_slot_free
+    same_slot = { offered_professional_id: offered_professional_id, offered_slot_starts_at: offered_slot_starts_at }
+    errors.add(:offered_slot_starts_at, :taken) if self.class.offered.where.not(id: id).exists?(same_slot)
+  end
+
+  def outside_quiet_hours
     errors.add(:base, :quiet_hours) if quiet_hours?
   end
 
