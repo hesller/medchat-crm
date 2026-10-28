@@ -23,6 +23,7 @@ module AccountSettingsSchema
         'captain_false_promise_harness_enabled': { 'type': %w[boolean null] },
         'brand_name': { 'type': %w[string null], 'maxLength': 255 },
         'brand_url': { 'type': %w[string null], 'maxLength': 2000 },
+        'pipeline_enabled': { 'type': %w[boolean null] },
         'brand_color': { 'type': %w[string null], 'pattern': '^(#(\\h{3}|\\h{6}))?$' },
         'conversation_required_attributes': {
           'type': %w[array null],

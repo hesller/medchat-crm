@@ -401,6 +401,18 @@ Rails.application.routes.draw do
             end
           end
           resources :labels, only: [:index, :show, :create, :update, :destroy]
+          resources :pipelines, only: [:index, :show, :create, :update, :destroy] do
+            resources :stages, controller: 'pipelines/stages', only: [:create, :update, :destroy] do
+              collection do
+                patch :reorder
+              end
+            end
+            resources :cards, controller: 'pipelines/cards', only: [:create, :update, :destroy] do
+              member do
+                patch :move
+              end
+            end
+          end
 
           resources :notifications, only: [:index, :update, :destroy] do
             collection do
