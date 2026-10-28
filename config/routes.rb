@@ -401,6 +401,7 @@ Rails.application.routes.draw do
             end
           end
           resources :labels, only: [:index, :show, :create, :update, :destroy]
+          resources :professionals, only: [:index, :show, :create, :update, :destroy]
           resources :pipelines, only: [:index, :show, :create, :update, :destroy] do
             resources :stages, controller: 'pipelines/stages', only: [:create, :update, :destroy] do
               collection do

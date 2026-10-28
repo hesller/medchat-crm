@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_10_26_120000) do
+ActiveRecord::Schema[7.2].define(version: 2026_10_28_230000) do
   # These extensions should be enabled to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -1618,6 +1618,18 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_26_120000) do
     t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "professionals", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "name", null: false
+    t.string "specialty", null: false
+    t.string "external_calendar_id"
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id", "external_calendar_id"], name: "index_professionals_on_account_id_and_external_calendar_id", unique: true, where: "(external_calendar_id IS NOT NULL)"
+    t.index ["account_id", "specialty"], name: "index_professionals_on_account_id_and_specialty"
   end
 
   create_table "portals", force: :cascade do |t|
