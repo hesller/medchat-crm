@@ -52,7 +52,8 @@
   "SIDEBAR": {
     "INTERNAL_CHAT": "Internal Chat",
     "PIPELINE": "Pipeline",
-    "APPS": "Apps"
+    "APPS": "Apps",
+    "WAITLIST": "Waiting list"
   },
   "KEYBOARD_SHORTCUTS": {
     "TITLE": {

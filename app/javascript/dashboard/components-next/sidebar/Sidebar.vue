@@ -544,6 +544,13 @@ const menuItems = computed(() => {
         ]
       : []),
     {
+      name: 'Waitlist',
+      label: t('SIDEBAR.WAITLIST'),
+      icon: 'i-lucide-hourglass',
+      to: accountScopedRoute('waitlist_view'),
+      activeOn: ['waitlist_view'],
+    },
+    {
       name: 'Captain',
       icon: 'i-woot-captain',
       label: t('SIDEBAR.CAPTAIN'),
