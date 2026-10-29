@@ -10,6 +10,7 @@
 #  updated_at           :datetime         not null
 #  account_id           :bigint           not null
 #  external_calendar_id :string
+#  encaixe_calendar_id  :string
 #  encaixe_daily_limit  :integer
 #
 # Indexes

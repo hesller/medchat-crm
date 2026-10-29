@@ -6,6 +6,7 @@ class CreateEncaixes < ActiveRecord::Migration[7.2]
       t.references :contact, null: false, index: true
       t.datetime :starts_at, null: false
       t.integer :status, null: false, default: 0
+      t.string :external_booking_uid
       t.timestamps
     end
 

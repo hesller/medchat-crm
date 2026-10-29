@@ -189,6 +189,9 @@ pt_BR:
           attributes:
             base:
               limit_reached: Este profissional atingiu o limite de encaixes do dia
+              calendar_unavailable: A agenda não aceitou este horário. Escolha outro
+            professional:
+              no_encaixe_calendar: Este profissional não tem uma agenda configurada para encaixes
         waitlist_entry:
           attributes:
             base:

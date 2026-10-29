@@ -19,6 +19,7 @@ const name = ref('');
 const specialty = ref('');
 const externalCalendarId = ref('');
 const encaixeDailyLimit = ref('');
+const encaixeCalendarId = ref('');
 const active = ref(true);
 
 const isEditing = computed(() => !!professional.value);
@@ -30,6 +31,7 @@ const open = (existing = null) => {
   specialty.value = existing?.specialty || '';
   externalCalendarId.value = existing?.external_calendar_id || '';
   encaixeDailyLimit.value = existing?.encaixe_daily_limit ?? '';
+  encaixeCalendarId.value = existing?.encaixe_calendar_id || '';
   active.value = existing ? existing.active : true;
   dialogRef.value?.open();
 };
@@ -42,6 +44,7 @@ const submit = async () => {
     external_calendar_id: externalCalendarId.value.trim() || null,
     encaixe_daily_limit:
       encaixeDailyLimit.value === '' ? null : Number(encaixeDailyLimit.value),
+    encaixe_calendar_id: encaixeCalendarId.value.trim() || null,
     active: active.value,
   };
   try {
@@ -101,6 +104,11 @@ defineExpose({ open });
         min="0"
         :label="t('WAITLIST.PROFESSIONAL_FORM.ENCAIXE_LIMIT')"
         :message="t('WAITLIST.PROFESSIONAL_FORM.ENCAIXE_LIMIT_HELP')"
+      />
+      <Input
+        v-model="encaixeCalendarId"
+        :label="t('WAITLIST.PROFESSIONAL_FORM.ENCAIXE_CALENDAR_ID')"
+        :message="t('WAITLIST.PROFESSIONAL_FORM.ENCAIXE_CALENDAR_ID_HELP')"
       />
       <label class="flex items-center gap-2 text-sm text-n-slate-12">
         <Switch v-model="active" />

@@ -56,6 +56,8 @@
       "CALENDAR_ID_HELP": "Identifier of this professional's calendar in the scheduling system.",
       "ENCAIXE_LIMIT": "Encaixes per day",
       "ENCAIXE_LIMIT_HELP": "Leave empty if this professional does not take encaixes.",
+      "ENCAIXE_CALENDAR_ID": "Encaixe calendar ID",
+      "ENCAIXE_CALENDAR_ID_HELP": "ID of the encaixe event type in Cal.diy, with the clinic's full hours.",
       "ACTIVE": "Active"
     },
     "SETTINGS": {

@@ -56,6 +56,8 @@
       "CALENDAR_ID_HELP": "Identificador da agenda deste profissional no sistema de agendamento.",
       "ENCAIXE_LIMIT": "Encaixes por dia",
       "ENCAIXE_LIMIT_HELP": "Deixe vazio se este profissional não aceita encaixes.",
+      "ENCAIXE_CALENDAR_ID": "ID da agenda de encaixes",
+      "ENCAIXE_CALENDAR_ID_HELP": "ID do tipo de evento de encaixe no Cal.diy, com o horário completo da clínica.",
       "ACTIVE": "Ativo"
     },
     "SETTINGS": {
