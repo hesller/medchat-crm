@@ -1,6 +1,10 @@
 {
   "WAITLIST": {
     "TITLE": "Waiting list",
+    "DISABLED": {
+      "TITLE": "Waiting list is not enabled",
+      "DESCRIPTION": "The waiting list is not part of this account's plan. Ask the platform administrator to enable it."
+    },
     "TABS": {
       "QUEUE": "Queue",
       "PROFESSIONALS": "Professionals",

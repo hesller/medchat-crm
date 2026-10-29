@@ -99,6 +99,11 @@ const isPipelineEnabled = computed(
   () => !!currentAccount.value?.settings?.pipeline_enabled
 );
 
+// A superadmin enables the waiting list per account, according to its plan.
+const isWaitlistEnabled = computed(
+  () => !!currentAccount.value?.settings?.waitlist_enabled
+);
+
 const hasDataImport = computed(() => {
   return isFeatureEnabledonAccount.value(
     accountId.value,
@@ -543,13 +548,17 @@ const menuItems = computed(() => {
           },
         ]
       : []),
-    {
-      name: 'Waitlist',
-      label: t('SIDEBAR.WAITLIST'),
-      icon: 'i-lucide-hourglass',
-      to: accountScopedRoute('waitlist_view'),
-      activeOn: ['waitlist_view'],
-    },
+    ...(isWaitlistEnabled.value
+      ? [
+          {
+            name: 'Waitlist',
+            label: t('SIDEBAR.WAITLIST'),
+            icon: 'i-lucide-hourglass',
+            to: accountScopedRoute('waitlist_view'),
+            activeOn: ['waitlist_view'],
+          },
+        ]
+      : []),
     {
       name: 'Captain',
       icon: 'i-woot-captain',

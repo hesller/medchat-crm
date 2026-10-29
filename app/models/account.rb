@@ -75,7 +75,7 @@ class Account < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # user signs in, the host is all there is to say which account's brand to show. See Brand.
   store_accessor :settings, :brand_name, :brand_url, :brand_color, :brand_host
   # Turned on per account by a superadmin, according to the account's plan.
-  store_accessor :settings, :pipeline_enabled
+  store_accessor :settings, :pipeline_enabled, :waitlist_enabled
   store_accessor :settings, :waitlist_offer_timeout_minutes, :waitlist_entry_validity_days,
                  :waitlist_quiet_hours_start, :waitlist_quiet_hours_end
   include AccountAgentRestrictions
@@ -210,6 +210,10 @@ class Account < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   # The superadmin form posts "1"/"0" and the settings JSON schema only accepts booleans.
   def pipeline_enabled=(value)
+    super(ActiveModel::Type::Boolean.new.cast(value))
+  end
+
+  def waitlist_enabled=(value)
     super(ActiveModel::Type::Boolean.new.cast(value))
   end
 

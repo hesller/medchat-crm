@@ -24,6 +24,7 @@ module AccountSettingsSchema
         'brand_name': { 'type': %w[string null], 'maxLength': 255 },
         'brand_url': { 'type': %w[string null], 'maxLength': 2000 },
         'pipeline_enabled': { 'type': %w[boolean null] },
+        'waitlist_enabled': { 'type': %w[boolean null] },
         'waitlist_offer_timeout_minutes': { 'type': %w[integer null], 'minimum': 5, 'maximum': 1440 },
         'waitlist_entry_validity_days': { 'type': %w[integer null], 'minimum': 1, 'maximum': 365 },
         'waitlist_quiet_hours_start': { 'type': %w[string null], 'pattern': '^([01]\\d|2[0-3]):[0-5]\\d$' },
