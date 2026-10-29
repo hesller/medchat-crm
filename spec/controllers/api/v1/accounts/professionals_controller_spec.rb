@@ -34,6 +34,32 @@ RSpec.describe 'Professionals API', type: :request do
     end
   end
 
+  describe 'health plans' do
+    let(:nacional) { create(:health_plan, account: account, name: 'Unimed Nacional') }
+
+    it 'lists only the professionals of the specialty that accept the plan' do
+      cardiologist.update!(health_plans: [nacional])
+      create(:professional, account: account, name: 'Dr. Sem Plano', specialty: 'Cardiologia')
+      create(:professional, account: account, name: 'Dra. Outra Especialidade', specialty: 'Dermatologia', health_plans: [nacional])
+
+      get "/api/v1/accounts/#{account.id}/professionals",
+          params: { health_plan_id: nacional.id, specialty: 'Cardiologia' },
+          headers: agent.create_new_auth_token, as: :json
+
+      expect(response.parsed_body['payload'].pluck('name')).to eq(['Dr. Carlos'])
+    end
+
+    it 'replaces the accepted plans when an administrator updates the professional' do
+      other = create(:health_plan, account: account, name: 'Amil 500')
+      cardiologist.update!(health_plans: [nacional])
+
+      patch "/api/v1/accounts/#{account.id}/professionals/#{cardiologist.id}",
+            params: { professional: { health_plan_ids: [other.id] } }, headers: admin.create_new_auth_token, as: :json
+
+      expect(response.parsed_body['health_plan_ids']).to eq([other.id])
+    end
+  end
+
   describe 'POST /api/v1/accounts/{account.id}/professionals' do
     let(:valid_params) { { professional: { name: 'Dr. Novo', specialty: 'Ortopedia', external_calendar_id: 'cal-9' } } }
 

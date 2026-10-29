@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_10_28_231000) do
+ActiveRecord::Schema[7.2].define(version: 2026_10_29_150000) do
   # These extensions should be enabled to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -1164,6 +1164,15 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_28_231000) do
     t.index ["group_contact_id"], name: "index_group_members_on_group_contact_id"
   end
 
+  create_table "health_plans", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "name", null: false
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index "account_id, lower((name)::text)", name: "index_health_plans_on_account_id_and_lower_name", unique: true
+  end
+
   create_table "inbox_assignment_policies", force: :cascade do |t|
     t.bigint "inbox_id", null: false
     t.bigint "assignment_policy_id", null: false
@@ -1618,6 +1627,15 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_28_231000) do
     t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "professional_health_plans", force: :cascade do |t|
+    t.bigint "professional_id", null: false
+    t.bigint "health_plan_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["health_plan_id"], name: "index_professional_health_plans_on_health_plan_id"
+    t.index ["professional_id", "health_plan_id"], name: "index_professional_health_plans_uniqueness", unique: true
   end
 
   create_table "professionals", force: :cascade do |t|

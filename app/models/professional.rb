@@ -18,11 +18,14 @@
 #
 class Professional < ApplicationRecord
   belongs_to :account
+  has_many :professional_health_plans, dependent: :destroy
+  has_many :health_plans, through: :professional_health_plans
 
   validates :name, presence: true
   validates :specialty, presence: true
   validates :external_calendar_id, uniqueness: { scope: :account_id }, allow_nil: true
 
   scope :active, -> { where(active: true) }
+  scope :accepting_health_plan, ->(health_plan_id) { where(id: ProfessionalHealthPlan.where(health_plan_id: health_plan_id).select(:professional_id)) }
   default_scope { order(:name) }
 end
