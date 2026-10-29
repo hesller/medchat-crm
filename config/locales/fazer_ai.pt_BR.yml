@@ -185,6 +185,10 @@ pt_BR:
   activerecord:
     errors:
       models:
+        encaixe:
+          attributes:
+            base:
+              limit_reached: Este profissional atingiu o limite de encaixes do dia
         waitlist_entry:
           attributes:
             base:

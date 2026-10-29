@@ -54,6 +54,8 @@
       "SPECIALTY": "Specialty",
       "CALENDAR_ID": "Calendar ID",
       "CALENDAR_ID_HELP": "Identifier of this professional's calendar in the scheduling system.",
+      "ENCAIXE_LIMIT": "Encaixes per day",
+      "ENCAIXE_LIMIT_HELP": "Leave empty if this professional does not take encaixes.",
       "ACTIVE": "Active"
     },
     "SETTINGS": {

@@ -54,6 +54,8 @@
       "SPECIALTY": "Especialidad",
       "CALENDAR_ID": "ID de la agenda",
       "CALENDAR_ID_HELP": "Identificador de la agenda de este profesional en el sistema de citas.",
+      "ENCAIXE_LIMIT": "Encajes por día",
+      "ENCAIXE_LIMIT_HELP": "Déjelo vacío si este profesional no acepta encajes.",
       "ACTIVE": "Activo"
     },
     "SETTINGS": {

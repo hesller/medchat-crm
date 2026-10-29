@@ -185,6 +185,10 @@ es:
   activerecord:
     errors:
       models:
+        encaixe:
+          attributes:
+            base:
+              limit_reached: Este profesional alcanzó el límite de encajes del día
         waitlist_entry:
           attributes:
             base:

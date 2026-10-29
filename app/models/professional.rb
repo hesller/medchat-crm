@@ -10,6 +10,7 @@
 #  updated_at           :datetime         not null
 #  account_id           :bigint           not null
 #  external_calendar_id :string
+#  encaixe_daily_limit  :integer
 #
 # Indexes
 #
@@ -18,9 +19,11 @@
 #
 class Professional < ApplicationRecord
   belongs_to :account
+  has_many :encaixes, dependent: :destroy_async
 
   validates :name, presence: true
   validates :specialty, presence: true
+  validates :encaixe_daily_limit, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
   validates :external_calendar_id, uniqueness: { scope: :account_id }, allow_nil: true
 
   scope :active, -> { where(active: true) }
