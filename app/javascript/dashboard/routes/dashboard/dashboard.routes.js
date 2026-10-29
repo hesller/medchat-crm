@@ -9,9 +9,10 @@ import { frontendURL } from '../../helper/URLHelper';
 import helpcenterRoutes from './helpcenter/helpcenter.routes';
 import campaignsRoutes from './campaigns/campaigns.routes';
 import { routes as captainRoutes } from './captain/captain.routes';
-import { routes as kanbanRoutes } from './kanban/kanban.routes';
 import dashboardAppsRoutes from './dashboardApps/dashboardApps.routes';
 import internalChatRoutes from './internalChat/internalChat.routes';
+import { routes as pipelineRoutes } from './pipeline/pipeline.routes';
+import { routes as waitlistRoutes } from './waitlist/waitlist.routes';
 import AppContainer from './Dashboard.vue';
 import Suspended from './suspended/Index.vue';
 import NoAccounts from './noAccounts/Index.vue';
@@ -25,7 +26,6 @@ export default {
       component: AppContainer,
       children: [
         ...captainRoutes,
-        ...kanbanRoutes,
         ...inboxRoutes,
         ...conversation.routes,
         ...settings.routes,
@@ -37,6 +37,8 @@ export default {
         ...campaignsRoutes.routes,
         ...dashboardAppsRoutes.routes,
         ...internalChatRoutes.routes,
+        ...pipelineRoutes,
+        ...waitlistRoutes,
       ],
     },
     {

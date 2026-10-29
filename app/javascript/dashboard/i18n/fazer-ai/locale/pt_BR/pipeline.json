@@ -1,0 +1,83 @@
+{
+  "PIPELINE": {
+    "TITLE": "Pipeline",
+    "SELECT_PLACEHOLDER": "Selecione um pipeline",
+    "CONFIRM_DELETE": "Excluir",
+    "DISABLED": {
+      "TITLE": "O pipeline não está habilitado",
+      "DESCRIPTION": "O pipeline não faz parte do plano desta conta. Peça ao administrador da plataforma para habilitá-lo."
+    },
+    "EMPTY": {
+      "TITLE": "Nenhum pipeline ainda",
+      "ADMIN_DESCRIPTION": "Crie um pipeline para acompanhar seus negócios etapa por etapa.",
+      "AGENT_DESCRIPTION": "Um administrador desta conta precisa criar o primeiro pipeline."
+    },
+    "ACTIONS": {
+      "NEW_PIPELINE": "Novo pipeline",
+      "EDIT_PIPELINE": "Editar pipeline",
+      "NEW_STAGE": "Nova etapa"
+    },
+    "STAGE": {
+      "EDIT": "Editar etapa",
+      "TOTAL": "Total: {total}",
+      "ADD_CARD": "Adicionar card"
+    },
+    "PIPELINE_FORM": {
+      "CREATE_TITLE": "Novo pipeline",
+      "EDIT_TITLE": "Editar pipeline",
+      "DESCRIPTION": "Ele começa com as etapas Lead, Contatado, Proposta e Ganho, que você pode renomear, reordenar ou excluir depois.",
+      "NAME_LABEL": "Nome",
+      "NAME_PLACEHOLDER": "Ex.: Vendas",
+      "CREATE": "Criar",
+      "SAVE": "Salvar",
+      "DELETE": "Excluir pipeline",
+      "DELETE_CONFIRM_TITLE": "Excluir este pipeline?",
+      "DELETE_CONFIRM_DESCRIPTION": "\"{name}\" será excluído com todas as etapas e cards. Isso não pode ser desfeito.",
+      "DEFAULT_STAGES": {
+        "LEAD": "Lead",
+        "CONTACTED": "Contatado",
+        "PROPOSAL": "Proposta",
+        "WON": "Ganho"
+      }
+    },
+    "STAGE_FORM": {
+      "CREATE_TITLE": "Nova etapa",
+      "EDIT_TITLE": "Editar etapa",
+      "NAME_LABEL": "Nome",
+      "NAME_PLACEHOLDER": "Ex.: Negociação",
+      "COLOR_LABEL": "Cor",
+      "CREATE": "Criar",
+      "SAVE": "Salvar",
+      "DELETE": "Excluir etapa",
+      "DELETE_CONFIRM_TITLE": "Excluir esta etapa?",
+      "DELETE_CONFIRM_DESCRIPTION": "\"{name}\" será excluída com seus {count} card(s). Isso não pode ser desfeito."
+    },
+    "CARD_FORM": {
+      "CREATE_TITLE": "Novo card",
+      "EDIT_TITLE": "Editar card",
+      "TITLE_LABEL": "Título",
+      "TITLE_PLACEHOLDER": "Ex.: Implante dentário",
+      "VALUE_LABEL": "Valor",
+      "VALUE_PLACEHOLDER": "0,00",
+      "CONTACT_LABEL": "Contato",
+      "CONTACT_PLACEHOLDER": "Selecione um contato",
+      "CONTACT_SEARCH": "Buscar contatos",
+      "ASSIGNEE_LABEL": "Responsável",
+      "ASSIGNEE_PLACEHOLDER": "Selecione um agente",
+      "NO_ASSIGNEE": "Sem responsável",
+      "DESCRIPTION_LABEL": "Observações",
+      "DESCRIPTION_PLACEHOLDER": "Adicione detalhes sobre este negócio",
+      "CREATE": "Criar",
+      "SAVE": "Salvar",
+      "DELETE": "Excluir card",
+      "DELETE_CONFIRM_TITLE": "Excluir este card?",
+      "DELETE_CONFIRM_DESCRIPTION": "\"{title}\" será excluído. Isso não pode ser desfeito."
+    },
+    "MESSAGES": {
+      "LOAD_ERROR": "Não foi possível carregar o pipeline. Tente novamente.",
+      "SAVE_ERROR": "Não foi possível salvar. Confira os campos e tente novamente.",
+      "DELETE_ERROR": "Não foi possível excluir. Tente novamente.",
+      "MOVE_ERROR": "Não foi possível mover. O quadro foi recarregado."
+    }
+  }
+}

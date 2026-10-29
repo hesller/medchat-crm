@@ -1,0 +1,83 @@
+{
+  "PIPELINE": {
+    "TITLE": "Pipeline",
+    "SELECT_PLACEHOLDER": "Selecciona un pipeline",
+    "CONFIRM_DELETE": "Eliminar",
+    "DISABLED": {
+      "TITLE": "El pipeline no está habilitado",
+      "DESCRIPTION": "El pipeline no forma parte del plan de esta cuenta. Pide al administrador de la plataforma que lo habilite."
+    },
+    "EMPTY": {
+      "TITLE": "Aún no hay pipelines",
+      "ADMIN_DESCRIPTION": "Crea un pipeline para seguir tus negocios etapa por etapa.",
+      "AGENT_DESCRIPTION": "Un administrador de esta cuenta debe crear el primer pipeline."
+    },
+    "ACTIONS": {
+      "NEW_PIPELINE": "Nuevo pipeline",
+      "EDIT_PIPELINE": "Editar pipeline",
+      "NEW_STAGE": "Nueva etapa"
+    },
+    "STAGE": {
+      "EDIT": "Editar etapa",
+      "TOTAL": "Total: {total}",
+      "ADD_CARD": "Agregar tarjeta"
+    },
+    "PIPELINE_FORM": {
+      "CREATE_TITLE": "Nuevo pipeline",
+      "EDIT_TITLE": "Editar pipeline",
+      "DESCRIPTION": "Empieza con las etapas Lead, Contactado, Propuesta y Ganado, que puedes renombrar, reordenar o eliminar después.",
+      "NAME_LABEL": "Nombre",
+      "NAME_PLACEHOLDER": "Ej.: Ventas",
+      "CREATE": "Crear",
+      "SAVE": "Guardar",
+      "DELETE": "Eliminar pipeline",
+      "DELETE_CONFIRM_TITLE": "¿Eliminar este pipeline?",
+      "DELETE_CONFIRM_DESCRIPTION": "\"{name}\" se eliminará con todas sus etapas y tarjetas. Esto no se puede deshacer.",
+      "DEFAULT_STAGES": {
+        "LEAD": "Lead",
+        "CONTACTED": "Contactado",
+        "PROPOSAL": "Propuesta",
+        "WON": "Ganado"
+      }
+    },
+    "STAGE_FORM": {
+      "CREATE_TITLE": "Nueva etapa",
+      "EDIT_TITLE": "Editar etapa",
+      "NAME_LABEL": "Nombre",
+      "NAME_PLACEHOLDER": "Ej.: Negociación",
+      "COLOR_LABEL": "Color",
+      "CREATE": "Crear",
+      "SAVE": "Guardar",
+      "DELETE": "Eliminar etapa",
+      "DELETE_CONFIRM_TITLE": "¿Eliminar esta etapa?",
+      "DELETE_CONFIRM_DESCRIPTION": "\"{name}\" se eliminará con sus {count} tarjeta(s). Esto no se puede deshacer."
+    },
+    "CARD_FORM": {
+      "CREATE_TITLE": "Nueva tarjeta",
+      "EDIT_TITLE": "Editar tarjeta",
+      "TITLE_LABEL": "Título",
+      "TITLE_PLACEHOLDER": "Ej.: Implante dental",
+      "VALUE_LABEL": "Valor",
+      "VALUE_PLACEHOLDER": "0,00",
+      "CONTACT_LABEL": "Contacto",
+      "CONTACT_PLACEHOLDER": "Selecciona un contacto",
+      "CONTACT_SEARCH": "Buscar contactos",
+      "ASSIGNEE_LABEL": "Responsable",
+      "ASSIGNEE_PLACEHOLDER": "Selecciona un agente",
+      "NO_ASSIGNEE": "Sin responsable",
+      "DESCRIPTION_LABEL": "Notas",
+      "DESCRIPTION_PLACEHOLDER": "Agrega detalles sobre este negocio",
+      "CREATE": "Crear",
+      "SAVE": "Guardar",
+      "DELETE": "Eliminar tarjeta",
+      "DELETE_CONFIRM_TITLE": "¿Eliminar esta tarjeta?",
+      "DELETE_CONFIRM_DESCRIPTION": "\"{title}\" se eliminará. Esto no se puede deshacer."
+    },
+    "MESSAGES": {
+      "LOAD_ERROR": "No se pudo cargar el pipeline. Inténtalo de nuevo.",
+      "SAVE_ERROR": "No se pudo guardar. Revisa los campos e inténtalo de nuevo.",
+      "DELETE_ERROR": "No se pudo eliminar. Inténtalo de nuevo.",
+      "MOVE_ERROR": "No se pudo mover. El tablero se recargó."
+    }
+  }
+}

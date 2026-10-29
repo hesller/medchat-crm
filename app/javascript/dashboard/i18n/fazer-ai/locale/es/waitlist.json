@@ -1,0 +1,72 @@
+{
+  "WAITLIST": {
+    "TITLE": "Lista de espera",
+    "TABS": {
+      "QUEUE": "Cola",
+      "PROFESSIONALS": "Profesionales",
+      "SETTINGS": "Configuración"
+    },
+    "STATUS": {
+      "OPEN": "Abiertos",
+      "WAITING": "En espera",
+      "OFFERED": "Cupo ofrecido",
+      "SCHEDULED": "Agendado",
+      "EXPIRED": "Vencido",
+      "CANCELLED": "Cancelado"
+    },
+    "QUEUE": {
+      "FILTER": "Filtrar por estado",
+      "ADD": "Agregar a la lista de espera",
+      "EMPTY": "Todavía no hay nadie aquí.",
+      "CANCEL": "Quitar",
+      "ANY_PROFESSIONAL": "Cualquier profesional · {specialty}",
+      "OFFER_SUMMARY": "Se ofreció {professional} el {slot}"
+    },
+    "MESSAGES": {
+      "LOAD_ERROR": "No se pudieron cargar los datos. Inténtalo de nuevo.",
+      "CANCEL_ERROR": "No se pudo quitar a este paciente de la lista de espera.",
+      "SAVE_ERROR": "No se pudo guardar. Revisa los datos e inténtalo de nuevo.",
+      "DELETE_ERROR": "No se pudo eliminar a este profesional."
+    },
+    "ENTRY_FORM": {
+      "TITLE": "Agregar a la lista de espera",
+      "DESCRIPTION": "Al paciente se le ofrece el primer cupo que se libere para la especialidad o el profesional elegido aquí.",
+      "SAVE": "Agregar",
+      "CONTACT": "Paciente",
+      "CONTACT_SEARCH": "Buscar por nombre o teléfono",
+      "SPECIALTY": "Especialidad",
+      "NO_PROFESSIONALS": "Primero registra a los profesionales, en la pestaña Profesionales.",
+      "PROFESSIONAL": "Profesional",
+      "ANY_PROFESSIONAL": "Cualquier profesional de la especialidad"
+    },
+    "PROFESSIONALS": {
+      "ADD": "Nuevo profesional",
+      "EMPTY": "Todavía no hay profesionales registrados.",
+      "INACTIVE": "Inactivo",
+      "EDIT": "Editar profesional",
+      "DELETE": "Eliminar profesional"
+    },
+    "PROFESSIONAL_FORM": {
+      "CREATE_TITLE": "Nuevo profesional",
+      "EDIT_TITLE": "Editar profesional",
+      "SAVE": "Guardar",
+      "NAME": "Nombre",
+      "SPECIALTY": "Especialidad",
+      "CALENDAR_ID": "ID de la agenda",
+      "CALENDAR_ID_HELP": "Identificador de la agenda de este profesional en el sistema de citas.",
+      "ACTIVE": "Activo"
+    },
+    "SETTINGS": {
+      "SUCCESS": "Configuración de la lista de espera guardada.",
+      "ERROR": "No se pudo guardar la configuración.",
+      "OFFER_TIMEOUT": "Tiempo para aceptar una oferta (minutos)",
+      "OFFER_TIMEOUT_HELP": "Pasado ese tiempo, el cupo pasa al siguiente paciente de la cola.",
+      "ENTRY_VALIDITY": "Días en la lista de espera",
+      "ENTRY_VALIDITY_HELP": "Pasados estos días, el paciente al que no se le ofreció un cupo sale de la lista.",
+      "QUIET_START": "Sin ofertas desde",
+      "QUIET_END": "Sin ofertas hasta",
+      "QUIET_HELP": "No se envían ofertas en este período, según la zona horaria de la cuenta. Deja ambos vacíos para ofrecer a cualquier hora.",
+      "SAVE": "Guardar configuración"
+    }
+  }
+}

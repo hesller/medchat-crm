@@ -45,7 +45,8 @@ class AccountDashboard < Administrate::BaseDashboard
     # without them an installation has no way to turn either feature on from the UI.
     feature_branded_dashboard: Field::Boolean,
     feature_branded_email_templates: Field::Boolean,
-    brand_host: Field::String
+    brand_host: Field::String,
+    pipeline_enabled: Field::Boolean
   }.merge(enterprise_attribute_types).freeze
 
   # COLLECTION_ATTRIBUTES
@@ -89,6 +90,7 @@ class AccountDashboard < Administrate::BaseDashboard
     feature_branded_dashboard
     feature_branded_email_templates
     brand_host
+    pipeline_enabled
   ] + enterprise_show_page_attributes).freeze
 
   # FORM_ATTRIBUTES
@@ -113,6 +115,7 @@ class AccountDashboard < Administrate::BaseDashboard
     feature_branded_dashboard
     feature_branded_email_templates
     brand_host
+    pipeline_enabled
   ] + enterprise_form_attributes).freeze
 
   # COLLECTION_FILTERS

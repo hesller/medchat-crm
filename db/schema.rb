@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_10_11_120000) do
+ActiveRecord::Schema[7.2].define(version: 2026_10_28_231000) do
   # These extensions should be enabled to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -1555,6 +1555,46 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_11_120000) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
+  create_table "pipeline_cards", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "pipeline_id", null: false
+    t.bigint "pipeline_stage_id", null: false
+    t.bigint "contact_id"
+    t.bigint "assignee_id"
+    t.string "title", null: false
+    t.text "description"
+    t.decimal "value", precision: 15, scale: 2
+    t.integer "position", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_pipeline_cards_on_account_id"
+    t.index ["assignee_id"], name: "index_pipeline_cards_on_assignee_id"
+    t.index ["contact_id"], name: "index_pipeline_cards_on_contact_id"
+    t.index ["pipeline_id"], name: "index_pipeline_cards_on_pipeline_id"
+    t.index ["pipeline_stage_id", "position"], name: "index_pipeline_cards_on_pipeline_stage_id_and_position"
+  end
+
+  create_table "pipeline_stages", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "pipeline_id", null: false
+    t.string "name", null: false
+    t.string "color", default: "#1F93FF", null: false
+    t.integer "position", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_pipeline_stages_on_account_id"
+    t.index ["pipeline_id"], name: "index_pipeline_stages_on_pipeline_id"
+  end
+
+  create_table "pipelines", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "name", null: false
+    t.integer "position", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_pipelines_on_account_id"
+  end
+
   create_table "platform_app_permissibles", force: :cascade do |t|
     t.bigint "platform_app_id", null: false
     t.string "permissible_type", null: false
@@ -1578,6 +1618,18 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_11_120000) do
     t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "professionals", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "name", null: false
+    t.string "specialty", null: false
+    t.string "external_calendar_id"
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id", "external_calendar_id"], name: "index_professionals_on_account_id_and_external_calendar_id", unique: true, where: "(external_calendar_id IS NOT NULL)"
+    t.index ["account_id", "specialty"], name: "index_professionals_on_account_id_and_specialty"
   end
 
   create_table "portals", force: :cascade do |t|
@@ -1849,6 +1901,26 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_11_120000) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  create_table "waitlist_entries", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "contact_id", null: false
+    t.bigint "professional_id"
+    t.bigint "offered_professional_id"
+    t.string "specialty", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "expires_at", null: false
+    t.datetime "offered_at"
+    t.datetime "offered_slot_starts_at"
+    t.datetime "offer_expires_at"
+    t.jsonb "declined_slots", default: [], null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id", "status", "specialty"], name: "index_waitlist_entries_on_account_id_and_status_and_specialty"
+    t.index ["contact_id", "status"], name: "index_waitlist_entries_on_contact_id_and_status"
+    t.index ["offer_expires_at"], name: "index_waitlist_entries_on_offer_expires_at", where: "(status = 1)"
+    t.index ["offered_professional_id", "offered_slot_starts_at"], name: "index_waitlist_entries_on_active_offer_slot", unique: true, where: "(status = 1)"
+  end
+
   create_table "webhooks", force: :cascade do |t|
     t.integer "account_id"
     t.integer "inbox_id"
@@ -1906,6 +1978,11 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_11_120000) do
   add_foreign_key "internal_chat_polls", "internal_chat_messages"
   add_foreign_key "internal_chat_reactions", "internal_chat_messages"
   add_foreign_key "internal_chat_reactions", "users", on_delete: :cascade
+  add_foreign_key "pipeline_cards", "contacts", on_delete: :nullify
+  add_foreign_key "pipeline_cards", "pipeline_stages"
+  add_foreign_key "pipeline_cards", "pipelines"
+  add_foreign_key "pipeline_cards", "users", column: "assignee_id", on_delete: :nullify
+  add_foreign_key "pipeline_stages", "pipelines"
   add_foreign_key "recurring_scheduled_messages", "accounts"
   add_foreign_key "recurring_scheduled_messages", "conversations"
   add_foreign_key "recurring_scheduled_messages", "inboxes"

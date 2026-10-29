@@ -1,0 +1,83 @@
+{
+  "PIPELINE": {
+    "TITLE": "Pipeline",
+    "SELECT_PLACEHOLDER": "Select a pipeline",
+    "CONFIRM_DELETE": "Delete",
+    "DISABLED": {
+      "TITLE": "Pipeline is not enabled",
+      "DESCRIPTION": "The pipeline is not part of this account's plan. Ask the platform administrator to enable it."
+    },
+    "EMPTY": {
+      "TITLE": "No pipelines yet",
+      "ADMIN_DESCRIPTION": "Create a pipeline to follow your deals stage by stage.",
+      "AGENT_DESCRIPTION": "An administrator of this account needs to create the first pipeline."
+    },
+    "ACTIONS": {
+      "NEW_PIPELINE": "New pipeline",
+      "EDIT_PIPELINE": "Edit pipeline",
+      "NEW_STAGE": "New stage"
+    },
+    "STAGE": {
+      "EDIT": "Edit stage",
+      "TOTAL": "Total: {total}",
+      "ADD_CARD": "Add card"
+    },
+    "PIPELINE_FORM": {
+      "CREATE_TITLE": "New pipeline",
+      "EDIT_TITLE": "Edit pipeline",
+      "DESCRIPTION": "It starts with the stages Lead, Contacted, Proposal and Won, which you can rename, reorder or delete later.",
+      "NAME_LABEL": "Name",
+      "NAME_PLACEHOLDER": "E.g. Sales",
+      "CREATE": "Create",
+      "SAVE": "Save",
+      "DELETE": "Delete pipeline",
+      "DELETE_CONFIRM_TITLE": "Delete this pipeline?",
+      "DELETE_CONFIRM_DESCRIPTION": "\"{name}\" will be deleted with all its stages and cards. This cannot be undone.",
+      "DEFAULT_STAGES": {
+        "LEAD": "Lead",
+        "CONTACTED": "Contacted",
+        "PROPOSAL": "Proposal",
+        "WON": "Won"
+      }
+    },
+    "STAGE_FORM": {
+      "CREATE_TITLE": "New stage",
+      "EDIT_TITLE": "Edit stage",
+      "NAME_LABEL": "Name",
+      "NAME_PLACEHOLDER": "E.g. Negotiation",
+      "COLOR_LABEL": "Color",
+      "CREATE": "Create",
+      "SAVE": "Save",
+      "DELETE": "Delete stage",
+      "DELETE_CONFIRM_TITLE": "Delete this stage?",
+      "DELETE_CONFIRM_DESCRIPTION": "\"{name}\" will be deleted with its {count} card(s). This cannot be undone."
+    },
+    "CARD_FORM": {
+      "CREATE_TITLE": "New card",
+      "EDIT_TITLE": "Edit card",
+      "TITLE_LABEL": "Title",
+      "TITLE_PLACEHOLDER": "E.g. Dental implant",
+      "VALUE_LABEL": "Value",
+      "VALUE_PLACEHOLDER": "0.00",
+      "CONTACT_LABEL": "Contact",
+      "CONTACT_PLACEHOLDER": "Select a contact",
+      "CONTACT_SEARCH": "Search contacts",
+      "ASSIGNEE_LABEL": "Owner",
+      "ASSIGNEE_PLACEHOLDER": "Select an agent",
+      "NO_ASSIGNEE": "No owner",
+      "DESCRIPTION_LABEL": "Notes",
+      "DESCRIPTION_PLACEHOLDER": "Add details about this deal",
+      "CREATE": "Create",
+      "SAVE": "Save",
+      "DELETE": "Delete card",
+      "DELETE_CONFIRM_TITLE": "Delete this card?",
+      "DELETE_CONFIRM_DESCRIPTION": "\"{title}\" will be deleted. This cannot be undone."
+    },
+    "MESSAGES": {
+      "LOAD_ERROR": "Could not load the pipeline. Try again.",
+      "SAVE_ERROR": "Could not save. Check the fields and try again.",
+      "DELETE_ERROR": "Could not delete. Try again.",
+      "MOVE_ERROR": "Could not move it. The board was reloaded."
+    }
+  }
+}

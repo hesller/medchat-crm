@@ -182,3 +182,18 @@ en:
       handled_count: Handled conversations
       avg_customer_waiting_time: Avg customer waiting time
       resolution_count: Resolution Count
+  pipelines:
+    disabled: The pipeline is not enabled for this account
+    invalid_stage_order: Send every stage of the pipeline exactly once
+  activerecord:
+    errors:
+      models:
+        waitlist_entry:
+          attributes:
+            base:
+              already_queued: This patient is already on the waiting list for this specialty or professional
+              quiet_hours: Offers cannot be made during the quiet hours configured for this account
+              offer_expired: This offer has already expired
+            offered_slot_starts_at:
+              taken: This slot was already offered to another patient
+              declined: This patient already declined this slot

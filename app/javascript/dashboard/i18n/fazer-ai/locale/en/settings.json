@@ -51,8 +51,9 @@
   },
   "SIDEBAR": {
     "INTERNAL_CHAT": "Internal Chat",
-    "KANBAN": "Kanban",
-    "APPS": "Apps"
+    "PIPELINE": "Pipeline",
+    "APPS": "Apps",
+    "WAITLIST": "Waiting list"
   },
   "KEYBOARD_SHORTCUTS": {
     "TITLE": {

@@ -182,3 +182,18 @@ pt_BR:
       handled_count: Conversas atendidas
       avg_customer_waiting_time: Tempo médio de espera do cliente
       resolution_count: Contagem de Resolução
+  pipelines:
+    disabled: O pipeline não está habilitado para esta conta
+    invalid_stage_order: Envie todas as etapas do pipeline, cada uma uma única vez
+  activerecord:
+    errors:
+      models:
+        waitlist_entry:
+          attributes:
+            base:
+              already_queued: Este paciente já está na lista de espera dessa especialidade ou profissional
+              quiet_hours: Não é possível fazer ofertas no horário de silêncio configurado para esta conta
+              offer_expired: Esta oferta já expirou
+            offered_slot_starts_at:
+              taken: Este horário já foi oferecido a outro paciente
+              declined: Este paciente já recusou este horário

@@ -126,7 +126,8 @@ class Api::V1::AccountsController < Api::BaseController
 
   def permitted_settings_attributes
     [:auto_resolve_after, :auto_resolve_message, :auto_resolve_ignore_waiting, :audio_transcriptions, :auto_resolve_label,
-     :brand_name, :brand_url, :brand_color]
+     :brand_name, :brand_url, :brand_color, :waitlist_offer_timeout_minutes, :waitlist_entry_validity_days,
+     :waitlist_quiet_hours_start, :waitlist_quiet_hours_end]
   end
 
   def check_signup_enabled
