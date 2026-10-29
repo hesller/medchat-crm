@@ -401,6 +401,17 @@ Rails.application.routes.draw do
             end
           end
           resources :labels, only: [:index, :show, :create, :update, :destroy]
+          resources :professionals, only: [:index, :show, :create, :update, :destroy]
+          resources :waitlist_entries, only: [:index, :show, :create, :destroy] do
+            collection do
+              get :next
+            end
+            member do
+              post :offer
+              post :accept
+              post :decline
+            end
+          end
           resources :pipelines, only: [:index, :show, :create, :update, :destroy] do
             resources :stages, controller: 'pipelines/stages', only: [:create, :update, :destroy] do
               collection do

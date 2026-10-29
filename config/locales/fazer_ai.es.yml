@@ -182,3 +182,15 @@ es:
   pipelines:
     disabled: El pipeline no está habilitado para esta cuenta
     invalid_stage_order: Envía todas las etapas del pipeline, cada una una sola vez
+  activerecord:
+    errors:
+      models:
+        waitlist_entry:
+          attributes:
+            base:
+              already_queued: Este paciente ya está en la lista de espera de esta especialidad o profesional
+              quiet_hours: No se pueden hacer ofertas en el horario de silencio configurado para esta cuenta
+              offer_expired: Esta oferta ya expiró
+            offered_slot_starts_at:
+              taken: Este horario ya fue ofrecido a otro paciente
+              declined: Este paciente ya rechazó este horario

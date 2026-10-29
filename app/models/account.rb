@@ -72,6 +72,8 @@ class Account < ApplicationRecord # rubocop:disable Metrics/ClassLength
   store_accessor :settings, :brand_name, :brand_url, :brand_color
   # Turned on per account by a superadmin, according to the account's plan.
   store_accessor :settings, :pipeline_enabled
+  store_accessor :settings, :waitlist_offer_timeout_minutes, :waitlist_entry_validity_days,
+                 :waitlist_quiet_hours_start, :waitlist_quiet_hours_end
   include AccountAgentRestrictions
   include AccountWhatsappProviders
   include AccountCaptainAutoResolve
@@ -114,6 +116,8 @@ class Account < ApplicationRecord # rubocop:disable Metrics/ClassLength
   has_many :notification_settings, dependent: :destroy_async
   has_many :notifications, dependent: :destroy_async
   has_many :pipelines, dependent: :destroy_async
+  has_many :professionals, dependent: :destroy_async
+  has_many :waitlist_entries, dependent: :destroy_async
   has_many :portals, dependent: :destroy_async, class_name: '::Portal'
   has_many :scheduled_messages, dependent: :destroy_async
   has_many :recurring_scheduled_messages, dependent: :destroy_async
@@ -203,6 +207,14 @@ class Account < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # The superadmin form posts "1"/"0" and the settings JSON schema only accepts booleans.
   def pipeline_enabled=(value)
     super(ActiveModel::Type::Boolean.new.cast(value))
+  end
+
+  def waitlist_offer_timeout_minutes
+    super || 30
+  end
+
+  def waitlist_entry_validity_days
+    super || 30
   end
 
   def onboarding_step

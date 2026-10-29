@@ -12,6 +12,7 @@ import { routes as captainRoutes } from './captain/captain.routes';
 import dashboardAppsRoutes from './dashboardApps/dashboardApps.routes';
 import internalChatRoutes from './internalChat/internalChat.routes';
 import { routes as pipelineRoutes } from './pipeline/pipeline.routes';
+import { routes as waitlistRoutes } from './waitlist/waitlist.routes';
 import AppContainer from './Dashboard.vue';
 import Suspended from './suspended/Index.vue';
 import NoAccounts from './noAccounts/Index.vue';
@@ -37,6 +38,7 @@ export default {
         ...dashboardAppsRoutes.routes,
         ...internalChatRoutes.routes,
         ...pipelineRoutes,
+        ...waitlistRoutes,
       ],
     },
     {
