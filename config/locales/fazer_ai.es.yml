@@ -188,6 +188,13 @@ es:
   activerecord:
     errors:
       models:
+        encaixe:
+          attributes:
+            base:
+              limit_reached: Este profesional alcanzó el límite de encajes del día
+              calendar_unavailable: El calendario no aceptó este horario. Elija otro
+            professional:
+              no_encaixe_calendar: Este profesional no tiene un calendario configurado para encajes
         waitlist_entry:
           attributes:
             base:

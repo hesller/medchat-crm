@@ -122,6 +122,7 @@ class Account < ApplicationRecord # rubocop:disable Metrics/ClassLength
   has_many :pipelines, dependent: :destroy_async
   has_many :professionals, dependent: :destroy_async
   has_many :waitlist_entries, dependent: :destroy_async
+  has_many :encaixes, dependent: :destroy_async
   has_many :portals, dependent: :destroy_async, class_name: '::Portal'
   has_many :scheduled_messages, dependent: :destroy_async
   has_many :recurring_scheduled_messages, dependent: :destroy_async

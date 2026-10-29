@@ -402,6 +402,7 @@ Rails.application.routes.draw do
           end
           resources :labels, only: [:index, :show, :create, :update, :destroy]
           resources :professionals, only: [:index, :show, :create, :update, :destroy]
+          resources :encaixes, only: [:index, :create, :destroy]
           resources :waitlist_entries, only: [:index, :show, :create, :destroy] do
             collection do
               get :next

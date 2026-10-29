@@ -54,6 +54,10 @@
       "SPECIALTY": "Especialidad",
       "CALENDAR_ID": "ID de la agenda",
       "CALENDAR_ID_HELP": "Identificador de la agenda de este profesional en el sistema de citas.",
+      "ENCAIXE_LIMIT": "Encajes por día",
+      "ENCAIXE_LIMIT_HELP": "Déjelo vacío si este profesional no acepta encajes.",
+      "ENCAIXE_CALENDAR_ID": "ID del calendario de encajes",
+      "ENCAIXE_CALENDAR_ID_HELP": "ID del tipo de evento de encajes en Cal.diy, con el horario completo de la clínica.",
       "ACTIVE": "Activo"
     },
     "SETTINGS": {

@@ -3,3 +3,5 @@ json.name professional.name
 json.specialty professional.specialty
 json.external_calendar_id professional.external_calendar_id
 json.active professional.active
+json.encaixe_daily_limit professional.encaixe_daily_limit
+json.encaixe_calendar_id professional.encaixe_calendar_id

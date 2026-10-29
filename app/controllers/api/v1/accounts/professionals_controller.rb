@@ -30,6 +30,6 @@ class Api::V1::Accounts::ProfessionalsController < Api::V1::Accounts::BaseContro
   end
 
   def permitted_params
-    params.require(:professional).permit(:name, :specialty, :external_calendar_id, :active)
+    params.require(:professional).permit(:name, :specialty, :external_calendar_id, :active, :encaixe_daily_limit, :encaixe_calendar_id)
   end
 end
