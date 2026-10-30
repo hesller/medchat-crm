@@ -1,0 +1,2 @@
+class HealthPlanPolicy < ProfessionalPolicy
+end

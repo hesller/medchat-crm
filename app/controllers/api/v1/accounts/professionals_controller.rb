@@ -6,6 +6,7 @@ class Api::V1::Accounts::ProfessionalsController < Api::V1::Accounts::BaseContro
     @professionals = policy_scope(Current.account.professionals)
     @professionals = @professionals.active if params[:active] == 'true'
     @professionals = @professionals.where(specialty: params[:specialty]) if params[:specialty].present?
+    @professionals = @professionals.accepting_health_plan(params[:health_plan_id]) if params[:health_plan_id].present?
   end
 
   def show; end
@@ -30,6 +31,6 @@ class Api::V1::Accounts::ProfessionalsController < Api::V1::Accounts::BaseContro
   end
 
   def permitted_params
-    params.require(:professional).permit(:name, :specialty, :external_calendar_id, :active)
+    params.require(:professional).permit(:name, :specialty, :external_calendar_id, :active, health_plan_ids: [])
   end
 end
