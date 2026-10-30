@@ -1,4 +1,6 @@
 class Api::V1::Accounts::WaitlistEntriesController < Api::V1::Accounts::BaseController
+  include WaitlistEnabledGuard
+
   before_action :fetch_entry, except: [:index, :create, :next]
   before_action :check_authorization
 

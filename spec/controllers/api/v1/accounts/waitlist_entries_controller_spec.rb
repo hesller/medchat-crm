@@ -1,12 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe 'Waitlist entries API', type: :request do
-  let(:account) { create(:account) }
+  let(:account) { create(:account, waitlist_enabled: true) }
   let(:agent) { create(:user, account: account, role: :agent) }
   let(:professional) { create(:professional, account: account, specialty: 'Cardiologia') }
   let(:contact) { create(:contact, account: account) }
   let(:slot) { 2.days.from_now.change(usec: 0).iso8601 }
   let(:path) { "/api/v1/accounts/#{account.id}/waitlist_entries" }
+
+  describe 'when the waiting list is disabled for the account' do
+    let(:account) { create(:account) }
+
+    it 'returns forbidden and queues nobody' do
+      post path, params: { contact_id: contact.id, specialty: 'Cardiologia' }, headers: agent.create_new_auth_token, as: :json
+
+      expect(response).to have_http_status(:forbidden)
+      expect(WaitlistEntry.count).to eq(0)
+    end
+  end
 
   describe 'GET /waitlist_entries' do
     it 'returns unauthorized for an unauthenticated user' do

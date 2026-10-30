@@ -1,6 +1,10 @@
 {
   "WAITLIST": {
     "TITLE": "Lista de espera",
+    "DISABLED": {
+      "TITLE": "A lista de espera não está habilitada",
+      "DESCRIPTION": "A lista de espera não faz parte do plano desta conta. Peça ao administrador da plataforma para habilitá-la."
+    },
     "TABS": {
       "QUEUE": "Fila",
       "PROFESSIONALS": "Profissionais",

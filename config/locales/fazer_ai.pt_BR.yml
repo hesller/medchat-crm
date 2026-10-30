@@ -182,6 +182,8 @@ pt_BR:
       handled_count: Conversas atendidas
       avg_customer_waiting_time: Tempo médio de espera do cliente
       resolution_count: Contagem de Resolução
+  waitlist:
+    disabled: A lista de espera não está habilitada para esta conta
   pipelines:
     disabled: O pipeline não está habilitado para esta conta
     invalid_stage_order: Envie todas as etapas do pipeline, cada uma uma única vez

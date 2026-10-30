@@ -182,6 +182,8 @@ en:
       handled_count: Handled conversations
       avg_customer_waiting_time: Avg customer waiting time
       resolution_count: Resolution Count
+  waitlist:
+    disabled: The waiting list is not enabled for this account
   pipelines:
     disabled: The pipeline is not enabled for this account
     invalid_stage_order: Send every stage of the pipeline exactly once
