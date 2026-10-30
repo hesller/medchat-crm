@@ -8,6 +8,7 @@ import ProfessionalsAPI from 'dashboard/api/professionals';
 import Button from 'dashboard/components-next/button/Button.vue';
 import Spinner from 'dashboard/components-next/spinner/Spinner.vue';
 import ProfessionalDialog from './ProfessionalDialog.vue';
+import EncaixeDialog from './EncaixeDialog.vue';
 
 const { t } = useI18n();
 const { isAdmin } = useAdmin();
@@ -15,6 +16,7 @@ const { isAdmin } = useAdmin();
 const professionals = ref([]);
 const isLoading = ref(false);
 const dialogRef = ref(null);
+const encaixeDialogRef = ref(null);
 
 const load = async () => {
   isLoading.value = true;
@@ -79,7 +81,20 @@ onMounted(load);
             </template>
           </span>
         </div>
-        <div v-if="isAdmin" class="flex items-center gap-1 ms-auto">
+        <div class="flex items-center gap-1 ms-auto">
+          <Button
+            v-if="
+              professional.encaixe_daily_limit &&
+              professional.encaixe_calendar_id
+            "
+            :label="t('WAITLIST.PROFESSIONALS.BOOK_ENCAIXE')"
+            icon="i-lucide-calendar-plus"
+            slate
+            sm
+            @click="encaixeDialogRef.open(professional)"
+          />
+        </div>
+        <div v-if="isAdmin" class="flex items-center gap-1">
           <Button
             icon="i-lucide-pencil"
             :aria-label="t('WAITLIST.PROFESSIONALS.EDIT')"
@@ -101,5 +116,6 @@ onMounted(load);
     </ul>
 
     <ProfessionalDialog ref="dialogRef" @saved="load" />
+    <EncaixeDialog ref="encaixeDialogRef" />
   </div>
 </template>

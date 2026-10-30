@@ -44,7 +44,8 @@
       "EMPTY": "No professionals registered yet.",
       "INACTIVE": "Inactive",
       "EDIT": "Edit professional",
-      "DELETE": "Delete professional"
+      "DELETE": "Delete professional",
+      "BOOK_ENCAIXE": "Book encaixe"
     },
     "PROFESSIONAL_FORM": {
       "CREATE_TITLE": "New professional",
@@ -71,6 +72,14 @@
       "QUIET_END": "No offers until",
       "QUIET_HELP": "Offers are not sent during this period, using the account timezone. Leave both empty to offer at any time.",
       "SAVE": "Save settings"
+    },
+    "ENCAIXE_FORM": {
+      "TITLE": "Encaixe with {professional}",
+      "DESCRIPTION": "The patient takes a time outside the regular schedule. The professional's daily encaixe limit applies.",
+      "SAVE": "Book",
+      "STARTS_AT": "Date and time",
+      "SUCCESS": "Encaixe booked.",
+      "ERROR": "Could not book the encaixe. Check the limit and the time."
     }
   }
 }

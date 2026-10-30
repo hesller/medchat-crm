@@ -44,7 +44,8 @@
       "EMPTY": "Nenhum profissional cadastrado ainda.",
       "INACTIVE": "Inativo",
       "EDIT": "Editar profissional",
-      "DELETE": "Excluir profissional"
+      "DELETE": "Excluir profissional",
+      "BOOK_ENCAIXE": "Marcar encaixe"
     },
     "PROFESSIONAL_FORM": {
       "CREATE_TITLE": "Novo profissional",
@@ -71,6 +72,14 @@
       "QUIET_END": "Sem ofertas até",
       "QUIET_HELP": "Nenhuma oferta é enviada nesse período, no fuso horário da conta. Deixe os dois vazios para ofertar a qualquer hora.",
       "SAVE": "Salvar configurações"
+    },
+    "ENCAIXE_FORM": {
+      "TITLE": "Encaixe com {professional}",
+      "DESCRIPTION": "O paciente ocupa um horário fora da agenda normal. Vale o limite diário de encaixes do profissional.",
+      "SAVE": "Marcar",
+      "STARTS_AT": "Data e hora",
+      "SUCCESS": "Encaixe marcado.",
+      "ERROR": "Não foi possível marcar o encaixe. Confira o limite e o horário."
     }
   }
 }
